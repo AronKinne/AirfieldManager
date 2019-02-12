@@ -93,6 +93,7 @@ class Interactable {
         popMatrix();
       } else {
         stroke(0);
+        strokeWeight(1 / zoom);
         noFill();
         pushMatrix();
         translate(x, y);

@@ -10,10 +10,10 @@ void setup() {
   smooth();
 
   interactables = new ArrayList<Interactable>();
-  createInteractables();
+  createInteractables("data/interactables");
   currentMenu = null;
 
-  airfield = loadImage("airfield.png");
+  airfield = loadImage("data/images/airfield.png");
   airfield.resize(1600, 900);
 
   centerX = width * .5;

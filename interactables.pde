@@ -1,38 +1,71 @@
 Interactable hanger, kfzHalle;
 Plane ask21;
 
-void createInteractables() {
+void addMenu(Interactable inter, String parentName, Object[] menu) {
+  for (Object point : menu) {
 
-  hanger = new Interactable("Segelflugzeug-Halle", null);
-  hanger.setBounds(1365, 44, 47, 20);
-  hanger.setDir(.28);
+    // Untermenu
+    if (point instanceof JSONObject) {
+      JSONObject jPoint = (JSONObject)point;
+      String name = jPoint.getString("name");
+      Object[] oMenu = toObjectArray(jPoint.getJSONArray("menu"));
 
-  hanger.addMenuPoint("Segelflugzeug-Halle", "Flugzeuge");
-  /**/  hanger.addMenuPoint("Flugzeuge", "ASK 21");
-  /**/  hanger.addMenuPoint("Flugzeuge", "Twin");
-  /**/  hanger.addMenuPoint("Flugzeuge", "Puchacz");
-  /**/  hanger.addMenuPoint("Flugzeuge", "Bocian");
-  /**/  hanger.addMenuPoint("Flugzeuge", "Astir 84");
-  /**/  hanger.addMenuPoint("Flugzeuge", "Astir 01");
-  /**/  hanger.addMenuPoint("Flugzeuge", "Pirat");
+      inter.addMenuPoint(parentName, name);
+      addMenu(inter, name, oMenu);
+    }
 
- 
-  kfzHalle = new Interactable("KFZ-Halle", null);
-  kfzHalle.setBounds(1399, 54, 24, 20);
-  kfzHalle.setDir(.28);
+    // Unterpunkte
+    if (point instanceof String) {      
+      inter.addMenuPoint(parentName, point.toString());
+    }
+  }
+}
 
-  kfzHalle.addMenuPoint("KFZ-Halle", "Fahrzeuge");
-  /**/  kfzHalle.addMenuPoint("Fahrzeuge", "SKP");
-  /**/  kfzHalle.addMenuPoint("Fahrzeuge", "Winde");
-  /**/  kfzHalle.addMenuPoint("Fahrzeuge", "T4");
-  /**/  kfzHalle.addMenuPoint("Fahrzeuge", "Omega");
-  /**/  kfzHalle.addMenuPoint("Fahrzeuge", "Focus");
-  /**/  kfzHalle.addMenuPoint("Fahrzeuge", "Escort");
-  /**/  kfzHalle.addMenuPoint("Fahrzeuge", "Traktor");
-  kfzHalle.addMenuPoint("KFZ-Halle", "Akkus");
-  
-  ask21 = new Plane("ASK 21");
-  ask21.setBounds(1359, 79, 30, 10);
-  ask21.setDir(radians(150));
-  
+Object[] toObjectArray(JSONArray jArray) {
+  ArrayList<Object> list = new ArrayList<Object>(); 
+  for (int i = 0; i < jArray.size(); i++) { 
+    list.add(jArray.get(i));
+  }
+
+  Object[] out = new Object[list.size()];
+  for (int i = 0; i < list.size(); i++) { 
+    out[i] = list.get(i);
+  }
+
+  return out;
+}
+
+void createInteractables(String folderPath) {
+  File[] files = listFiles(folderPath + "/Interactable/");
+
+  for (File f : files) {
+    if (f.getAbsolutePath().endsWith(".json")) {
+      Interactable inter = null;
+
+      try {
+        JSONObject jFile = loadJSONObject(f);
+        String name = jFile.getString("name");
+        String imgPath = jFile.getString("img");
+
+        inter = new Interactable(name, imgPath);
+
+        JSONObject jPos = jFile.getJSONObject("pos");
+        inter.setBounds(jPos.getInt("x"), jPos.getInt("y"), jPos.getInt("w"), jPos.getInt("h"));
+        inter.setDir(jPos.getFloat("d"));
+
+        Object[] oMenu = toObjectArray(jFile.getJSONArray("menu"));
+        addMenu(inter, name, oMenu);
+      } 
+      catch(Exception e) {
+        if (interactables.contains(inter)) interactables.remove(inter);
+        println("ERROR: Could not load file " + f.getPath());
+      }
+    }
+  }
+
+  /*
+   ask21 = new Plane("ASK 21");
+   ask21.setBounds(1359, 79, 30, 10);
+   ask21.setDir(radians(150));
+   */
 }

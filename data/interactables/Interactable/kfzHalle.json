@@ -1,0 +1,25 @@
+{
+	"name": "KFZ-Halle",
+	"pos": {
+		"x": 1399,
+		"y": 54,
+		"w": 24,
+		"h": 20,
+		"d": .28
+	},
+	"menu": [
+		{
+			"name": "Fahrzeuge",
+			"menu": [
+				"SKP",
+				"Winde",
+				"T4",
+				"Omega",
+				"Focus",
+				"Escort",
+				"Traktor",
+			]
+		},
+		"Akkus"
+	]
+}
