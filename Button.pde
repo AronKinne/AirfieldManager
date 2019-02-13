@@ -93,11 +93,13 @@ class Button {
     }
   }
 
-  void mousePressed() {
+  boolean mousePressed() {
     PVector m = getCoords(mouseX, mouseY);
 
     if (m.x >= x && m.x <= x + w && m.y >= y && m.y <= y + h && mouseButton == LEFT) {
       clicked();
+      return true;
     }
+    return false;
   }
 }

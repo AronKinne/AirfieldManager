@@ -1,6 +1,8 @@
 {
 	"name": "",
+	"type": "template",
 	"img": "",
+	"show": false,
 	"pos": {
 		"x": ,
 		"y": ,

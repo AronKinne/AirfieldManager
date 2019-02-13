@@ -1,7 +1,7 @@
 Interactable hanger, kfzHalle;
 Plane ask21;
 
-void addMenu(Interactable inter, String parentName, Object[] menu) {
+void addMenu(Interactable inter, Menu parentMenu, Object[] menu) {
   for (Object point : menu) {
 
     // Untermenu
@@ -10,13 +10,13 @@ void addMenu(Interactable inter, String parentName, Object[] menu) {
       String name = jPoint.getString("name");
       Object[] oMenu = toObjectArray(jPoint.getJSONArray("menu"));
 
-      inter.addMenuPoint(parentName, name);
-      addMenu(inter, name, oMenu);
+      Menu pm = inter.addMenuPoint(parentMenu.title, name);
+      addMenu(inter, pm, oMenu);
     }
 
     // Unterpunkte
-    if (point instanceof String) {      
-      inter.addMenuPoint(parentName, point.toString());
+    if (point instanceof String) {
+      inter.addMenuPoint(parentMenu, point.toString());
     }
   }
 }
@@ -36,7 +36,8 @@ Object[] toObjectArray(JSONArray jArray) {
 }
 
 void createInteractables(String folderPath) {
-  File[] files = listFiles(folderPath + "/Interactable/");
+  File[] files = (File[])concat((Object)listFiles(folderPath + "/Interactable/"), (Object)listFiles(folderPath + "/Plane/"));
+  println();
 
   for (File f : files) {
     if (f.getAbsolutePath().endsWith(".json")) {
@@ -45,16 +46,27 @@ void createInteractables(String folderPath) {
       try {
         JSONObject jFile = loadJSONObject(f);
         String name = jFile.getString("name");
-        String imgPath = jFile.getString("img");
 
-        inter = new Interactable(name, imgPath);
+        switch(jFile.getString("type").toLowerCase()) {
+        case "interactable": 
+          inter = new Interactable(name);
+          inter.setImage(jFile.getString("img"));
+          break;
+        case "plane":
+          inter = new Plane(name);
+          break;
+        default:
+          throw new RuntimeException();
+        }
+
+        inter.visible = jFile.getBoolean("show");
 
         JSONObject jPos = jFile.getJSONObject("pos");
         inter.setBounds(jPos.getInt("x"), jPos.getInt("y"), jPos.getInt("w"), jPos.getInt("h"));
         inter.setDir(jPos.getFloat("d"));
 
         Object[] oMenu = toObjectArray(jFile.getJSONArray("menu"));
-        addMenu(inter, name, oMenu);
+        addMenu(inter, inter.menu, oMenu);
       } 
       catch(Exception e) {
         if (interactables.contains(inter)) interactables.remove(inter);
@@ -62,10 +74,4 @@ void createInteractables(String folderPath) {
       }
     }
   }
-
-  /*
-   ask21 = new Plane("ASK 21");
-   ask21.setBounds(1359, 79, 30, 10);
-   ask21.setDir(radians(150));
-   */
 }

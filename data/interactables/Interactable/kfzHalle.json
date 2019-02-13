@@ -1,5 +1,7 @@
 {
 	"name": "KFZ-Halle",
+	"type": "Interactable",
+	"show": true,
 	"pos": {
 		"x": 1399,
 		"y": 54,

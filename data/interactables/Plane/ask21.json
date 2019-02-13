@@ -1,0 +1,22 @@
+{
+	"name": "ASK 21",
+	"type": "plane",
+	"show": true,
+	"pos": {
+		"x": 1359,
+		"y": 79,
+		"w": 30,
+		"h": 10,
+		"d": 1
+	},
+	"menu": [
+		"test",
+		{
+			"name": "Hallo",
+			"menu": [
+				"kaka",
+				"manno"
+			]
+		},
+	]
+}

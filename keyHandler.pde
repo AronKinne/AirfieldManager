@@ -25,7 +25,7 @@ void mousePressed() {
   if (currentMenu == null) {
     for (Interactable i : interactables) i.mousePressed();
   } else {
-    currentMenu.mousePressed();
+    if(!currentMenu.mousePressed()) currentMenu = null;
   }
 
   //println(getCoords(mouseX, mouseY));

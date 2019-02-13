@@ -7,9 +7,23 @@ class Interactable {
   String name;
   Menu menu;
 
+  Interactable(String name) {
+    this(name, null);
+  }
+
   Interactable(String name, String imgPath) {
     this.name = name;
+    setImage(imgPath);
 
+    dir = 0;
+    visible = true;
+
+    interactables.add(this);
+
+    menu = new Menu(name, x, y);
+  }
+
+  void setImage(String imgPath) {
     if (imgPath != null) {
       try {
         img = loadImage(imgPath);
@@ -21,13 +35,6 @@ class Interactable {
     } else {
       img = null;
     }
-
-    dir = 0;
-    visible = true;
-
-    interactables.add(this);
-
-    menu = new Menu(name, x, y);
   }
 
   void setBounds(float x, float y, float w, float h) {
@@ -40,15 +47,21 @@ class Interactable {
     menu.setPos(x, y);
   }
 
-  void addMenuPoint(String parentName, String menuName) {
+  Menu addMenuPoint(String parentName, String menuName) {
     Menu toAdd = menu.lookFor(parentName);
-    
-    if (toAdd != null) {
-      Menu newMenu = new Menu(menuName, toAdd);
-      toAdd.addMenuPoint(newMenu);
+    return addMenuPoint(toAdd, menuName);
+  }
+  
+  Menu addMenuPoint(Menu parentMenu, String menuName) {
+    if (parentMenu != null) {
+      Menu newMenu = new Menu(menuName, parentMenu);
+      parentMenu.addMenuPoint(newMenu);
+      return newMenu;
     } else {
-      println("ERROR: Could not find menu with name: " + parentName);
+      println("ERROR: Could not add menu with name: " + parentMenu.title);
     }
+    
+    return null;
   }
 
   void setDir(float d) {
@@ -73,12 +86,12 @@ class Interactable {
      strokeWeight(1);
      rect(x - w * .5, y - h * .5, w, h);
      */
-     
+
     return (mouse.x > x - w * .5 && mouse.x < x + w * .5 && mouse.y > y - h * .5 && mouse.y < y + h * .5);
   }
 
   void mousePressed() {
-    if (detectCollision(getCoords(mouseX, mouseY))) {
+    if (visible && detectCollision(getCoords(mouseX, mouseY))) {
       currentMenu = menu;
     }
   }

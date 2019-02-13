@@ -1,5 +1,7 @@
 {
 	"name": "Segelflugzeug-Halle",
+	"type": "Interactable",
+	"show": true,
 	"pos": {
 		"x": 1365,
 		"y": 44,

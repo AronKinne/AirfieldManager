@@ -27,7 +27,7 @@ void draw() {
   zoom(centerX, centerY, zoom);
 
   image(airfield, 0, 0);
-  for (Interactable i : interactables) i.draw();
+  for (Interactable i : interactables) if(i.visible) i.draw();
 
   if (currentMenu != null) {
     currentMenu.draw();

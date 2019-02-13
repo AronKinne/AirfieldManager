@@ -79,8 +79,15 @@ class Menu {
     menus.add(m);
   }
   
-  void mousePressed() {
-    for(Button b : buttons) b.mousePressed(); 
+  boolean mousePressed() {
+    boolean out = false;
+    for(Button b : buttons) {
+      if(b.mousePressed()) {
+        out = true;
+        break;
+      }
+    }
+    return out;
   }
 
   void draw() {
