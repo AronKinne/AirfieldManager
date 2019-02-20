@@ -26,6 +26,9 @@ void draw() {
   keyHandler();
   zoom(centerX, centerY, zoom);
 
+  // this is needed for sharp text at zoom
+  text("", 0, 0);
+
   image(airfield, 0, 0);
   for (Interactable i : interactables) if(i.visible) i.draw();
 
