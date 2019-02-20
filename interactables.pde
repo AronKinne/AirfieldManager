@@ -8,10 +8,18 @@ void addMenu(Interactable inter, Menu parentMenu, Object[] menu) {
     if (point instanceof JSONObject) {
       JSONObject jPoint = (JSONObject)point;
       String name = jPoint.getString("name");
-      Object[] oMenu = toObjectArray(jPoint.getJSONArray("menu"));
+      if (jPoint.getJSONArray("menu") != null) {
+        Object[] oMenu = toObjectArray(jPoint.getJSONArray("menu"));
 
-      Menu pm = inter.addMenuPoint(parentMenu.title, name);
-      addMenu(inter, pm, oMenu);
+        Menu pm = inter.addMenuPoint(parentMenu, name);
+        addMenu(inter, pm, oMenu);
+      } else if(jPoint.getString("object") != null) {
+        JSONObject jObject = loadJSONObject(jPoint.getString("object"));
+        Object[] oMenu = toObjectArray(jObject.getJSONArray("menu"));
+        
+        Menu pm = inter.addMenuPoint(parentMenu, name);
+        addMenu(inter, pm, oMenu);
+      }
     }
 
     // Unterpunkte

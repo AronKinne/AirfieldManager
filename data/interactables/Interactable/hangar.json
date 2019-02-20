@@ -13,7 +13,10 @@
 		{
 			"name": "Flugzeuge",
 			"menu": [
-				"ASK 21",
+				{
+					"name": "ASK 21",
+					"object": "data/interactables/Plane/ask21.json"
+				},
 				"Twin",
 				"Puchacz",
 				"Bocian",
