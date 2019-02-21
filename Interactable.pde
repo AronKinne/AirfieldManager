@@ -1,9 +1,3 @@
-enum State {
-  STATIC, 
-    IN_HANGAR, IN_KFZHALLE, 
-    HAT_KULLER
-}
-
 class Interactable {
 
   float x, y, w, h;
@@ -13,7 +7,7 @@ class Interactable {
   String name, jsonPath;
   JSONArray jMenu;
   Menu menu;
-  ArrayList<State> states;
+  ArrayList<String> states;
 
   Interactable(String name) {
     this(name, null);
@@ -31,20 +25,20 @@ class Interactable {
     jMenu = null;
     menu = new Menu(name, x, y);
 
-    states = new ArrayList<State>();
+    states = new ArrayList<String>();
   }
 
-  void addState(State s) {
+  void addState(String s) {
     if (!states.contains(s)) states.add(s);
   }
 
   void addStates(String[] strSta) {
     for (String s : strSta) {
-      addState(State.valueOf(s));
+      addState(s);
     }
   }
 
-  void removeState(State s) {
+  void removeState(String s) {
     if (!states.contains(s)) states.add(s);
   }
 

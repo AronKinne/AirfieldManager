@@ -3,7 +3,7 @@
 	"type": "Interactable",
 	"show": true,
 	"states": [
-		"STATIC",
+		"STATIC"
 	],
 	"pos": {
 		"x": 1365,

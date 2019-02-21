@@ -139,7 +139,7 @@ void addMenu(Interactable inter, Interactable reference, Menu parentMenu, Object
           int existingStates = 0;
 
           for (String strSta : states) {
-            if (reference.states.contains(State.valueOf(strSta))) {
+            if (reference.states.contains(strSta)) {
               existingStates++;
             }
           }
