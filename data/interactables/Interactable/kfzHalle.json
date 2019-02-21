@@ -2,6 +2,9 @@
 	"name": "KFZ-Halle",
 	"type": "Interactable",
 	"show": true,
+	"states": [
+		"STATIC"
+	],
 	"pos": {
 		"x": 1399,
 		"y": 54,

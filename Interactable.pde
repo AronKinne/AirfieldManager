@@ -1,3 +1,9 @@
+enum State {
+  STATIC, 
+    IN_HANGAR, IN_KFZHALLE, 
+    HAT_KULLER
+}
+
 class Interactable {
 
   float x, y, w, h;
@@ -6,6 +12,7 @@ class Interactable {
   boolean visible;
   String name;
   Menu menu;
+  ArrayList<State> states;
 
   Interactable(String name) {
     this(name, null);
@@ -21,6 +28,22 @@ class Interactable {
     interactables.add(this);
 
     menu = new Menu(name, x, y);
+
+    states = new ArrayList<State>();
+  }
+
+  void addState(State s) {
+    if (!states.contains(s)) states.add(s);
+  }
+  
+  void addStates(String[] strSta) {
+    for(String s : strSta) {
+      addState(State.valueOf(s)); 
+    }
+  }
+
+  void removeState(State s) {
+    if (!states.contains(s)) states.add(s);
   }
 
   void setImage(String imgPath) {
@@ -51,7 +74,7 @@ class Interactable {
     Menu toAdd = menu.lookFor(parentName);
     return addMenuPoint(toAdd, menuName);
   }
-  
+
   Menu addMenuPoint(Menu parentMenu, String menuName) {
     if (parentMenu != null) {
       Menu newMenu = new Menu(menuName, parentMenu);
@@ -60,7 +83,7 @@ class Interactable {
     } else {
       println("ERROR: Could not add menu with name: " + parentMenu.title);
     }
-    
+
     return null;
   }
 

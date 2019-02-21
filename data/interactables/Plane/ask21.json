@@ -2,6 +2,10 @@
 	"name": "ASK 21",
 	"type": "plane",
 	"show": true,
+	"states": [
+		"IN_HANGAR",
+		"HAT_KULLER"
+	],
 	"pos": {
 		"x": 1359,
 		"y": 79,

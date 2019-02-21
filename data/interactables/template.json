@@ -3,6 +3,9 @@
 	"type": "template",
 	"img": "",
 	"show": false,
+	"states": [
+		""
+	],
 	"pos": {
 		"x": ,
 		"y": ,
