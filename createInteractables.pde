@@ -23,7 +23,7 @@ void createInteractables(String folderPath) {
         }
 
         inter.visible = jFile.getBoolean("show");
-        
+
         Object[] oStates = toObjectArray(jFile.getJSONArray("states"));
         String[] states = Arrays.copyOf(oStates, oStates.length, String[].class);
         inter.addStates(states);
@@ -32,41 +32,14 @@ void createInteractables(String folderPath) {
         inter.setBounds(jPos.getInt("x"), jPos.getInt("y"), jPos.getInt("w"), jPos.getInt("h"));
         inter.setDir(jPos.getFloat("d"));
 
-        Object[] oMenu = toObjectArray(jFile.getJSONArray("menu"));
-        addMenu(inter, inter.menu, oMenu);
+        inter.jMenu = jFile.getJSONArray("menu");
+        
+        inter.jsonPath = f.getPath();
       } 
       catch(Exception e) {
         if (interactables.contains(inter)) interactables.remove(inter);
         println("ERROR: Could not load file " + f.getPath());
       }
-    }
-  }
-}
-
-void addMenu(Interactable inter, Menu parentMenu, Object[] menu) {
-  for (Object point : menu) {
-
-    // Untermenu
-    if (point instanceof JSONObject) {
-      JSONObject jPoint = (JSONObject)point;
-      String name = jPoint.getString("name");
-      if (jPoint.getJSONArray("menu") != null) {
-        Object[] oMenu = toObjectArray(jPoint.getJSONArray("menu"));
-
-        Menu pm = inter.addMenuPoint(parentMenu, name);
-        addMenu(inter, pm, oMenu);
-      } else if(jPoint.getString("object") != null) {
-        JSONObject jObject = loadJSONObject(jPoint.getString("object"));
-        Object[] oMenu = toObjectArray(jObject.getJSONArray("menu"));
-        
-        Menu pm = inter.addMenuPoint(parentMenu, name);
-        addMenu(inter, pm, oMenu);
-      }
-    }
-
-    // Unterpunkte
-    if (point instanceof String) {
-      inter.addMenuPoint(parentMenu, point.toString());
     }
   }
 }

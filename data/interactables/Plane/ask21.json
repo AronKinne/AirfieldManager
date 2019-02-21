@@ -14,7 +14,28 @@
 		"d": 1
 	},
 	"menu": [
-		"test",
+		{
+			"name": "Ausräumen",
+			"if": {
+				"states": [
+					"IN_HANGAR",
+					"HAT_KULLER"
+				]
+			},
+			"then": {
+				"remStates": [
+					"IN_HANGAR"
+				],
+				"show": true,
+				"pos": {
+					"x": 1359,
+					"y": 79,
+					"w": 30,
+					"h": 10,
+					"d": 1
+				}
+			}
+		},
 		{
 			"name": "Hallo",
 			"menu": [

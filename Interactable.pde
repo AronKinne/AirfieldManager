@@ -10,7 +10,8 @@ class Interactable {
   PImage img;
   float dir;
   boolean visible;
-  String name;
+  String name, jsonPath;
+  JSONArray jMenu;
   Menu menu;
   ArrayList<State> states;
 
@@ -27,6 +28,7 @@ class Interactable {
 
     interactables.add(this);
 
+    jMenu = null;
     menu = new Menu(name, x, y);
 
     states = new ArrayList<State>();
@@ -35,10 +37,10 @@ class Interactable {
   void addState(State s) {
     if (!states.contains(s)) states.add(s);
   }
-  
+
   void addStates(String[] strSta) {
-    for(String s : strSta) {
-      addState(State.valueOf(s)); 
+    for (String s : strSta) {
+      addState(State.valueOf(s));
     }
   }
 
@@ -113,8 +115,15 @@ class Interactable {
     return (mouse.x > x - w * .5 && mouse.x < x + w * .5 && mouse.y > y - h * .5 && mouse.y < y + h * .5);
   }
 
+  void loadMenu() {
+    menu = new Menu(name, x, y);
+    addMenu(this, this, menu, toObjectArray(jMenu));
+  }
+
   void mousePressed() {
     if (visible && detectCollision(getCoords(mouseX, mouseY))) {
+      loadMenu();
+
       currentMenu = menu;
     }
   }
