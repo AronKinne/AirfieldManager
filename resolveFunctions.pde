@@ -25,6 +25,12 @@ void resolve(Interactable inter, JSONObject jConclusion) {
   // function
   if (jConclusion.getString("function") != null) {
     String func = jConclusion.getString("function");
-    println(inter.name, func);
+    
+    MethodRelay mr = new MethodRelay(this, func, Interactable.class);
+    mr.execute(inter);
   }
+}
+
+void connectToPlane(Interactable inter) {
+    println(inter.name, "connect");
 }
