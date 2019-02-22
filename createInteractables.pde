@@ -9,18 +9,17 @@ void createInteractables(String folderPath) {
       try {
         JSONObject jFile = loadJSONObject(f);
         String name = jFile.getString("name");
+        String type = jFile.getString("type").toLowerCase();
 
-        switch(jFile.getString("type").toLowerCase()) {
+        switch(type) {
         case "interactable": 
-          inter = new Interactable(name);
-          inter.setImage(jFile.getString("img"));
+          inter = new Interactable(name, type, jFile.getString("img"));
           break;
         case "plane":
           inter = new Plane(name);
           break;
         case "vehicle":
-          inter = new Vehicle(name);
-          inter.setImage(jFile.getString("img"));
+          inter = new Vehicle(name, jFile.getString("img"));
           break;
         default:
           throw new RuntimeException();

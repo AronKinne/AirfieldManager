@@ -24,7 +24,15 @@ void keyReleased() {
 void mousePressed() {
   if (mouseButton == LEFT) {
     if (currentMenu == null) {
-      for (Interactable i : interactables) i.mousePressed();
+      boolean intClicked = false;
+      for (Interactable i : interactables) {
+        if(i.mousePressed()) intClicked = true;
+      }
+      if(memoryI != null) if(memoryI.mousePressed()) intClicked = false;
+      if(!intClicked) {
+         memoryI = null;
+         memoryS = "";
+      }
     } else {
       if (!currentMenu.mousePressed()) currentMenu = null;
     }
@@ -35,6 +43,7 @@ void mousePressed() {
       for (String s : i.states) print(s + " ");
       println();
     }
+    if (memoryI != null) println("Memory: " + memoryI.name, memoryS);
     println(getCoords(mouseX, mouseY));
   }
 }

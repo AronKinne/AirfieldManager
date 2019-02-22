@@ -4,17 +4,18 @@ class Interactable {
   PImage img;
   float dir;
   boolean visible;
-  String name, jsonPath;
+  String name, type, jsonPath;
   JSONArray jMenu;
   Menu menu;
   ArrayList<String> states;
 
   Interactable(String name) {
-    this(name, null);
+    this(name, "interactable", null);
   }
 
-  Interactable(String name, String imgPath) {
+  Interactable(String name, String type, String imgPath) {
     this.name = name;
+    this.type = type;
     setImage(imgPath);
 
     dir = 0;
@@ -100,7 +101,7 @@ class Interactable {
   void setDir(float d) {
     dir = d;
   }
-  
+
   void setDirDeg(float d) {
     setDir(radians(d));
   }
@@ -132,12 +133,17 @@ class Interactable {
     addMenu(this, this, menu, toObjectArray(jMenu));
   }
 
-  void mousePressed() {
+  boolean mousePressed() {
     if (visible && detectCollision(getCoords(mouseX, mouseY))) {
-      loadMenu();
-
-      currentMenu = menu;
+      if (memoryI != null) {
+        
+      } else {
+        loadMenu();
+        currentMenu = menu;
+      }
+      return true;
     }
+    return false;
   }
 
   void draw() {

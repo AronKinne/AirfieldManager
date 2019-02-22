@@ -4,6 +4,8 @@ import java.util.Arrays;
 float centerX, centerY, zoom;
 PImage airfield;
 ArrayList<Interactable> interactables;
+Interactable memoryI;
+String memoryS;
 Menu currentMenu;
 
 void setup() {
@@ -12,6 +14,8 @@ void setup() {
 
   interactables = new ArrayList<Interactable>();
   createInteractables("data/interactables");
+  memoryI = null;
+  memoryS = "";
   currentMenu = null;
 
   airfield = loadImage("data/images/airfield.png");
@@ -31,13 +35,13 @@ void draw() {
   text("", 0, 0);
 
   image(airfield, 0, 0);
-  for (Interactable i : interactables) if(i.visible) i.draw();
+  for (Interactable i : interactables) if (i.visible) i.draw();
 
   if (currentMenu != null) {
     currentMenu.draw();
   }
-  
-  for(int i = 0; i < interactables.size(); i++) {
+
+  for (int i = 0; i < interactables.size(); i++) {
     Interactable inter = interactables.get(i);
     String text = inter.name + ": " + join(Arrays.copyOf(inter.states.toArray(), inter.states.toArray().length, String[].class), " ");
     fill(255, 0, 0);
@@ -46,6 +50,8 @@ void draw() {
     PVector pos = getCoords(0, 15 * i);
     text(text, pos.x, pos.y);
   }
+    PVector pos = getCoords(0, 15 * interactables.size());
+  if (memoryI != null) text("Memory: " + memoryI.name + " " + memoryS, pos.x, pos.y);
 }
 
 void zoom(float x, float y, float z) {

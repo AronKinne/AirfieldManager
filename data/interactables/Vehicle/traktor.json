@@ -41,6 +41,17 @@
 				],
 				"show": false
 			}
+		},
+		{
+			"name": "Flugzeug anhängen",
+			"if": {
+				"noStates": [
+					"IN_KFZHALLE"
+				]				
+			},
+			"then": {
+				"connect": "plane"
+			}
 		}
 	]
 }

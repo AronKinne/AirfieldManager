@@ -1,7 +1,7 @@
 class Vehicle extends Interactable {
  
-  Vehicle(String name) {
-    super(name);
+  Vehicle(String name, String imgPath) {
+    super(name, "vehicle", imgPath);
   }
   
 }
