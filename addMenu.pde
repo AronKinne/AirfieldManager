@@ -10,38 +10,7 @@ void addMenu(Interactable inter, Interactable reference, Menu parentMenu, Object
       // Bedingung
       if (jPoint.getJSONObject("if") != null) {
         JSONObject jCondition =  jPoint.getJSONObject("if");
-        usable = false;
-        boolean useStates = true, useNoStates = true;
-
-        // states
-        if (jCondition.getJSONArray("states") != null) {
-          String[] states = toStringArray(jCondition.getJSONArray("states"));
-          int existingStates = 0;
-
-          for (String strSta : states) {
-            if (reference.states.contains(strSta)) {
-              existingStates++;
-            }
-          }
-
-          useStates = existingStates == states.length;
-        }
-        
-        // noStates
-        if (jCondition.getJSONArray("noStates") != null) {
-          String[] states = toStringArray(jCondition.getJSONArray("noStates"));
-          int existingStates = 0;
-
-          for (String strSta : states) {
-            if (reference.states.contains(strSta)) {
-              existingStates++;
-            }
-          }
-
-          useStates = existingStates == 0;
-        }
-
-        usable = useStates && useNoStates;
+        usable = checkStates(reference, jCondition) && checkNoStates(reference, jCondition) && checkObject(reference, jCondition);
       }
 
       if (usable) {
@@ -74,7 +43,7 @@ void addMenu(Interactable inter, Interactable reference, Menu parentMenu, Object
         // Then
         else if (jPoint.getJSONObject("then") != null) {
           JSONObject jConclusion =  jPoint.getJSONObject("then");
-          
+
           reference.addMenuFunction(parentMenu, name, jConclusion);
         }
 
@@ -90,4 +59,59 @@ void addMenu(Interactable inter, Interactable reference, Menu parentMenu, Object
       inter.addMenuPoint(parentMenu, point.toString());
     }
   }
+}
+
+// if states
+boolean checkStates(Interactable inter, JSONObject jCondition) {
+  if (jCondition.getJSONArray("states") != null) {
+    String[] states = toStringArray(jCondition.getJSONArray("states"));
+    int existingStates = 0;
+
+    for (String strSta : states) {
+      if (inter.states.contains(strSta)) {
+        existingStates++;
+      }
+    }
+
+    return existingStates == states.length;
+  }
+
+  return true;
+}
+
+// if noStates
+boolean checkNoStates(Interactable inter, JSONObject jCondition) {
+  if (jCondition.getJSONArray("noStates") != null) {
+    String[] states = toStringArray(jCondition.getJSONArray("noStates"));
+    int existingStates = 0;
+
+    for (String strSta : states) {
+      if (inter.states.contains(strSta)) {
+        existingStates++;
+      }
+    }
+
+    return existingStates == 0;
+  }
+
+  return true;
+}
+
+// if object
+boolean checkObject(Interactable inter, JSONObject jCondition) {
+  if (jCondition.getJSONObject("object") != null) {
+    JSONObject jObject = jCondition.getJSONObject("object");
+    Interactable ref = null;
+    String oPath = jObject.getString("path").replace("/", "\\");
+    for (Interactable i : interactables) {
+      if (i.jsonPath.equals(sketchPath("") + oPath)) {
+        ref = i;
+        break;
+      }
+    }
+    
+    return checkStates(ref, jObject) && checkNoStates(ref, jObject);
+  }
+  
+  return true;
 }

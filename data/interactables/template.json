@@ -1,6 +1,6 @@
 {
 	"name": "",
-	"type": "template",
+	"type": "Plane/Interactable",
 	"img": "",
 	"show": false,
 	"states": [
@@ -33,7 +33,16 @@
 				],
 				"noStates": [
 					""
-				]
+				],
+				"object": {
+					"path": "",
+					"states": [
+						""
+					],
+					"noStates": [
+						""
+					]
+				}
 			},
 			"then": {
 				"remStates": [

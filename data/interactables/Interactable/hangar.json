@@ -18,7 +18,15 @@
 			"menu": [
 				{
 					"name": "ASK 21",
-					"object": "data/interactables/Plane/ask21.json"
+					"object": "data/interactables/Plane/ask21.json",
+					"if": {
+						"object": {
+							"path": "data/interactables/Plane/ask21.json",
+							"states": [
+								"IN_HANGAR"
+							]
+						}
+					}
 				},
 				"Twin",
 				"Puchacz",
