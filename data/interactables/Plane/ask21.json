@@ -1,7 +1,7 @@
 {
 	"name": "ASK 21",
 	"type": "plane",
-	"show": true,
+	"show": false,
 	"states": [
 		"IN_HANGAR",
 		"HAT_KULLER"
@@ -11,7 +11,7 @@
 		"y": 79,
 		"w": 30,
 		"h": 10,
-		"d": 1
+		"d": 2.75
 	},
 	"menu": [
 		{
@@ -32,16 +32,26 @@
 					"y": 79,
 					"w": 30,
 					"h": 10,
-					"d": 1
+					"d": 2.75
 				}
 			}
 		},
 		{
-			"name": "Hallo",
-			"menu": [
-				"kaka",
-				"manno"
-			]
-		},
+			"name": "Einräumen",
+			"if": {
+				"states": [
+					"HAT_KULLER"
+				],
+				"noStates": [
+					"IN_HANGAR"
+				]
+			},
+			"then": {
+				"addStates": [
+					"IN_HANGAR"
+				],
+				"show": false
+			}
+		}
 	]
 }

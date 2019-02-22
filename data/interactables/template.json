@@ -27,8 +27,30 @@
 		},
 		{
 			"name": "",
-			"if": {},
-			"then": {}
+			"if": {
+				"states": [
+					""
+				],
+				"noStates": [
+					""
+				]
+			},
+			"then": {
+				"remStates": [
+					""
+				],
+				"addStates": [
+					""
+				],
+				"show": ,
+				"pos": {
+					"x": ,
+					"y": ,
+					"w": ,
+					"h": ,
+					"d": 
+				}
+			}
 		}
 	]
 }

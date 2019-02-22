@@ -11,12 +11,11 @@ void addMenu(Interactable inter, Interactable reference, Menu parentMenu, Object
       if (jPoint.getJSONObject("if") != null) {
         JSONObject jCondition =  jPoint.getJSONObject("if");
         usable = false;
-        boolean useStates = true;
+        boolean useStates = true, useNoStates = true;
 
         // states
         if (jCondition.getJSONArray("states") != null) {
-          Object[] oStates = toObjectArray(jCondition.getJSONArray("states"));
-          String[] states = Arrays.copyOf(oStates, oStates.length, String[].class);
+          String[] states = toStringArray(jCondition.getJSONArray("states"));
           int existingStates = 0;
 
           for (String strSta : states) {
@@ -27,8 +26,22 @@ void addMenu(Interactable inter, Interactable reference, Menu parentMenu, Object
 
           useStates = existingStates == states.length;
         }
+        
+        // noStates
+        if (jCondition.getJSONArray("noStates") != null) {
+          String[] states = toStringArray(jCondition.getJSONArray("noStates"));
+          int existingStates = 0;
 
-        usable = useStates;
+          for (String strSta : states) {
+            if (reference.states.contains(strSta)) {
+              existingStates++;
+            }
+          }
+
+          useStates = existingStates == 0;
+        }
+
+        usable = useStates && useNoStates;
       }
 
       if (usable) {
@@ -62,7 +75,7 @@ void addMenu(Interactable inter, Interactable reference, Menu parentMenu, Object
         else if (jPoint.getJSONObject("then") != null) {
           JSONObject jConclusion =  jPoint.getJSONObject("then");
           
-          inter.addMenuFunction(parentMenu, name, jConclusion);
+          reference.addMenuFunction(parentMenu, name, jConclusion);
         }
 
         // Menupunkt

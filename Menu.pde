@@ -79,16 +79,16 @@ class Menu {
     menus.add(m);
   }
   
-  void addMenuFunction(String name, JSONObject jConclusion) {
+  void addMenuFunction(Interactable inter, String name, JSONObject jConclusion) {
     final JSONObject jConclusionF = jConclusion;
+    final Interactable interF = inter;
     Button b = new Button(xo + spacing, yo + spacing + (buttons.size() + 1) * (hb + spacing), wb, hb, name) {
       public void clicked() {
-        resolve(jConclusionF);
+        resolve(interF, jConclusionF);
+        currentMenu = null;
       }
     };
-    //hm.put(b, m);
     buttons.add(buttons.size() - 1, b);
-    //menus.add(m);
   }
 
   boolean mousePressed() {

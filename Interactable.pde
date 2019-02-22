@@ -39,7 +39,13 @@ class Interactable {
   }
 
   void removeState(String s) {
-    if (!states.contains(s)) states.add(s);
+    if (states.contains(s)) states.remove(s);
+  }
+
+  void removeStates(String[] strSta) {
+    for (String s : strSta) {
+      removeState(s);
+    }
   }
 
   void setImage(String imgPath) {
@@ -82,10 +88,10 @@ class Interactable {
 
     return null;
   }
-  
+
   void addMenuFunction(Menu parentMenu, String name, JSONObject jConclusion) {
-    if(parentMenu != null) {
-      parentMenu.addMenuFunction(name, jConclusion); 
+    if (parentMenu != null) {
+      parentMenu.addMenuFunction(this, name, jConclusion);
     } else {
       println("ERROR: Could not add function to menu with name: " + parentMenu.title);
     }
