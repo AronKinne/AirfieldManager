@@ -1,0 +1,46 @@
+{
+	"name": "Traktor",
+	"type": "vehicle",
+	"show": false,
+	"img": "data/images/traktor.png",
+	"states": [
+		"IN_KFZHALLE"
+	],
+	"menu": [
+		{
+			"name": "Rausfahren",
+			"if": {
+				"states": [
+					"IN_KFZHALLE"
+				]
+			},
+			"then": {
+				"remStates": [
+					"IN_KFZHALLE"
+				],
+				"show": true,
+				"pos": {
+					"x": 1393,
+					"y": 71,
+					"w": 7,
+					"h": 10,
+					"d": 200
+				}
+			}
+		},
+		{
+			"name": "In KFZ-Halle fahren",
+			"if": {
+				"noStates": [
+					"IN_KFZHALLE"
+				]
+			},
+			"then": {
+				"addStates": [
+					"IN_KFZHALLE"
+				],
+				"show": false
+			}
+		}
+	]
+}

@@ -10,7 +10,7 @@
 		"y": 54,
 		"w": 24,
 		"h": 20,
-		"d": .28
+		"d": 16
 	},
 	"menu": [
 		{
@@ -22,7 +22,18 @@
 				"Omega",
 				"Focus",
 				"Escort",
-				"Traktor",
+				{
+					"name": "Traktor",
+					"object": "data/interactables/Vehicle/traktor.json",
+					"if": {
+						"object": {
+							"path": "data/interactables/Vehicle/traktor.json",
+							"states": [
+								"IN_KFZHALLE"
+							]
+						}
+					}
+				}
 			]
 		},
 		"Akkus"

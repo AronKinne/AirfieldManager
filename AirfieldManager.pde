@@ -36,6 +36,16 @@ void draw() {
   if (currentMenu != null) {
     currentMenu.draw();
   }
+  
+  for(int i = 0; i < interactables.size(); i++) {
+    Interactable inter = interactables.get(i);
+    String text = inter.name + ": " + join(Arrays.copyOf(inter.states.toArray(), inter.states.toArray().length, String[].class), " ");
+    fill(255, 0, 0);
+    textAlign(LEFT, TOP);
+    textSize(15 / zoom);
+    PVector pos = getCoords(0, 15 * i);
+    text(text, pos.x, pos.y);
+  }
 }
 
 void zoom(float x, float y, float z) {

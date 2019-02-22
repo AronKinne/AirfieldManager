@@ -35,7 +35,6 @@ void mousePressed() {
       for (String s : i.states) print(s + " ");
       println();
     }
+    println(getCoords(mouseX, mouseY));
   }
-
-  //println(getCoords(mouseX, mouseY));
 }

@@ -100,6 +100,10 @@ class Interactable {
   void setDir(float d) {
     dir = d;
   }
+  
+  void setDirDeg(float d) {
+    setDir(radians(d));
+  }
 
   boolean detectCollision(PVector mouse) {
     float s = sin(-dir);

@@ -1,5 +1,5 @@
 void createInteractables(String folderPath) {
-  File[] files = (File[])concat((Object)listFiles(folderPath + "/Interactable/"), (Object)listFiles(folderPath + "/Plane/"));
+  File[] files = getFiles(folderPath, "/Interactable/", "/Plane/", "/Vehicle/");
   println();
 
   for (File f : files) {
@@ -18,6 +18,10 @@ void createInteractables(String folderPath) {
         case "plane":
           inter = new Plane(name);
           break;
+        case "vehicle":
+          inter = new Vehicle(name);
+          inter.setImage(jFile.getString("img"));
+          break;
         default:
           throw new RuntimeException();
         }
@@ -27,10 +31,12 @@ void createInteractables(String folderPath) {
         String[] states = toStringArray(jFile.getJSONArray("states"));
         inter.addStates(states);
 
-        JSONObject jPos = jFile.getJSONObject("pos");
-        inter.setBounds(jPos.getInt("x"), jPos.getInt("y"), jPos.getInt("w"), jPos.getInt("h"));
-        inter.setDir(jPos.getFloat("d"));
-
+        if (jFile.getJSONObject("pos") != null) {
+          JSONObject jPos = jFile.getJSONObject("pos");
+          inter.setBounds(jPos.getInt("x"), jPos.getInt("y"), jPos.getInt("w"), jPos.getInt("h"));
+          inter.setDirDeg(jPos.getFloat("d"));
+        }
+        
         inter.jMenu = jFile.getJSONArray("menu");
 
         inter.jsonPath = f.getPath();
@@ -60,4 +66,15 @@ Object[] toObjectArray(JSONArray jArray) {
 String[] toStringArray(JSONArray jArray) {
   Object[] oStates = toObjectArray(jArray);
   return Arrays.copyOf(oStates, oStates.length, String[].class);
+}
+
+File[] getFiles(String folderPath, String... underFolderPaths) {
+  ArrayList<File> fileList = new ArrayList<File>();
+  for (String path : underFolderPaths) {
+    fileList.addAll(Arrays.asList(listFiles(folderPath + path)));
+  }
+
+  File[] files = new File[fileList.size()];
+  for (int i = 0; i < files.length; i++) files[i] = fileList.get(i);
+  return files;
 }

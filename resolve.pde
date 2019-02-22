@@ -19,6 +19,6 @@ void resolve(Interactable inter, JSONObject jConclusion) {
   if (jConclusion.getJSONObject("pos") != null) {
     JSONObject jPos = jConclusion.getJSONObject("pos");
     inter.setBounds(jPos.getInt("x"), jPos.getInt("y"), jPos.getInt("w"), jPos.getInt("h"));
-    inter.setDir(jPos.getFloat("d"));
+    inter.setDirDeg(jPos.getFloat("d"));
   }
 }
