@@ -41,6 +41,17 @@
 				],
 				"show": false
 			}
+		},
+		{
+			"name": "Mit Flugzeug verbinden",
+			"if": {
+				"noStates": [
+					"IN_KFZHALLE"
+				]
+			},
+			"then": {
+				"function": "connectToPlane"
+			}
 		}
 	]
 }

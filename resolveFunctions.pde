@@ -15,10 +15,16 @@ void resolve(Interactable inter, JSONObject jConclusion) {
     inter.visible = jConclusion.getBoolean("show");
   }
 
-  //pos
+  // pos
   if (jConclusion.getJSONObject("pos") != null) {
     JSONObject jPos = jConclusion.getJSONObject("pos");
     inter.setBounds(jPos.getInt("x"), jPos.getInt("y"), jPos.getInt("w"), jPos.getInt("h"));
     inter.setDirDeg(jPos.getFloat("d"));
+  }
+
+  // function
+  if (jConclusion.getString("function") != null) {
+    String func = jConclusion.getString("function");
+    println(inter.name, func);
   }
 }
