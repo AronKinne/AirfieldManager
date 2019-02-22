@@ -23,6 +23,12 @@ void keyReleased() {
 
 void mousePressed() {
   if (mouseButton == LEFT) {
+    if (activeInter != null && activeFunc != "") {
+      MethodRelay mr = new MethodRelay(this, activeFunc, Interactable.class, PVector.class);
+      mr.execute(activeInter, new PVector(mouseX, mouseY));
+      activeInter = null;
+      activeFunc = "";
+    }
     if (currentMenu == null) {
       for (Interactable i : interactables) i.mousePressed();
     } else {

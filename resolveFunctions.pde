@@ -24,13 +24,11 @@ void resolve(Interactable inter, JSONObject jConclusion) {
 
   // function
   if (jConclusion.getString("function") != null) {
-    String func = jConclusion.getString("function");
-    
-    MethodRelay mr = new MethodRelay(this, func, Interactable.class);
-    mr.execute(inter);
+    activeFunc = jConclusion.getString("function");
+    activeInter = inter;
   }
 }
 
-void connectToPlane(Interactable inter) {
-    println(inter.name, "connect");
+void connectToPlane(Interactable inter, PVector mouse) {
+  println(inter.name, "connect", mouse.x, mouse.y);
 }

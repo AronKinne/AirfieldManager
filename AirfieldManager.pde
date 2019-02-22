@@ -5,6 +5,8 @@ float centerX, centerY, zoom;
 PImage airfield;
 ArrayList<Interactable> interactables;
 Menu currentMenu;
+String activeFunc;
+Interactable activeInter;
 
 void setup() {
   size(1600, 900, P2D);
@@ -20,6 +22,9 @@ void setup() {
   centerX = width * .5;
   centerY = height * .5;
   zoom = 1;
+  
+  activeFunc = "";
+  activeInter = null;
 }
 
 void draw() {
