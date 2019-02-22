@@ -24,8 +24,7 @@ void createInteractables(String folderPath) {
 
         inter.visible = jFile.getBoolean("show");
 
-        Object[] oStates = toObjectArray(jFile.getJSONArray("states"));
-        String[] states = Arrays.copyOf(oStates, oStates.length, String[].class);
+        String[] states = toStringArray(jFile.getJSONArray("states"));
         inter.addStates(states);
 
         JSONObject jPos = jFile.getJSONObject("pos");
@@ -33,7 +32,7 @@ void createInteractables(String folderPath) {
         inter.setDir(jPos.getFloat("d"));
 
         inter.jMenu = jFile.getJSONArray("menu");
-        
+
         inter.jsonPath = f.getPath();
       } 
       catch(Exception e) {
@@ -56,4 +55,9 @@ Object[] toObjectArray(JSONArray jArray) {
   }
 
   return out;
+}
+
+String[] toStringArray(JSONArray jArray) {
+  Object[] oStates = toObjectArray(jArray);
+  return Arrays.copyOf(oStates, oStates.length, String[].class);
 }

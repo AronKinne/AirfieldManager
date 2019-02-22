@@ -82,6 +82,14 @@ class Interactable {
 
     return null;
   }
+  
+  void addMenuFunction(Menu parentMenu, String name, JSONObject jConclusion) {
+    if(parentMenu != null) {
+      parentMenu.addMenuFunction(name, jConclusion); 
+    } else {
+      println("ERROR: Could not add function to menu with name: " + parentMenu.title);
+    }
+  }
 
   void setDir(float d) {
     dir = d;
