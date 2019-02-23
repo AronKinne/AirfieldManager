@@ -28,8 +28,7 @@ void mousePressed() {
       mr.execute(activeInter, new PVector(mouseX, mouseY));
       activeInter = null;
       activeFunc = "";
-    }
-    if (currentMenu == null) {
+    } else if (currentMenu == null) {
       for (Interactable i : interactables) i.mousePressed();
     } else {
       if (!currentMenu.mousePressed()) currentMenu = null;

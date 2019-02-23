@@ -32,7 +32,8 @@
 			"name": "In KFZ-Halle fahren",
 			"if": {
 				"noStates": [
-					"IN_KFZHALLE"
+					"IN_KFZHALLE",
+					"HAT_FLUGZEUG"
 				]
 			},
 			"then": {
@@ -46,11 +47,29 @@
 			"name": "Mit Flugzeug verbinden",
 			"if": {
 				"noStates": [
-					"IN_KFZHALLE"
+					"IN_KFZHALLE",
+					"HAT_FLUGZEUG"
 				]
 			},
 			"then": {
 				"function": "connectToPlane"
+			}
+		},
+		{
+			"name": "Seil entfernen",
+			"if": {
+				"states": [
+					"HAT_FLUGZEUG"
+				],
+				"noStates": [
+					"IN_HANGAR"
+				]
+			},
+			"then": {
+				"function": "removeConnection",
+				"remStates": [
+					"HAT_FLUGZEUG"
+				]
 			}
 		}
 	]

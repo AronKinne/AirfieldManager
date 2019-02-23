@@ -100,7 +100,7 @@ class Interactable {
   void setDir(float d) {
     dir = d;
   }
-  
+
   void setDirDeg(float d) {
     setDir(radians(d));
   }

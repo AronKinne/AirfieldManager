@@ -30,5 +30,28 @@ void resolve(Interactable inter, JSONObject jConclusion) {
 }
 
 void connectToPlane(Interactable inter, PVector mouse) {
-  println(inter.name, "connect", mouse.x, mouse.y);
+  println("Function: connectToPlane");
+  
+  for (Interactable i : interactables) {
+    if (i != inter && i instanceof Plane) {
+      if (i.visible && i.detectCollision(getCoords(mouse.x, mouse.y)) && !i.states.contains("HAT_TOWCAR")) {
+        ((Plane)i).setTowCar((Vehicle)inter);
+        ((Vehicle)inter).setPulledPlane((Plane)i);
+        
+        i.addState("HAT_TOWCAR");
+        inter.addState("HAT_FLUGZEUG");
+        
+        println("Set " + ((Plane)i).towCar.name + " as towcar from " + i.name);
+      }
+    }
+  }
+}
+
+void removeConnection(Interactable inter, PVector mouse) {
+  println("Function: removeConnection");
+  
+  Vehicle v = (Vehicle)inter;
+  
+  v.pulledPlane.towCar = null;
+  v.pulledPlane = null;
 }

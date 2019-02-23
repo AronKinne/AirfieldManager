@@ -36,7 +36,8 @@
 					"HAT_KULLER"
 				],
 				"noStates": [
-					"IN_HANGAR"
+					"IN_HANGAR",
+					"HAT_TOWCAR"
 				]
 			},
 			"then": {
@@ -69,6 +70,19 @@
 			"then": {
 				"remStates": [
 					"HAT_KULLER"
+				]
+			}
+		},
+		{
+			"name": "Seil entfernen",
+			"if": {
+				"states": [
+					"HAT_TOWCAR"
+				]
+			},
+			"then": {
+				"remStates": [
+					"HAT_TOWCAR"
 				]
 			}
 		}
