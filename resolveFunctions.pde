@@ -27,31 +27,37 @@ void resolve(Interactable inter, JSONObject jConclusion) {
     activeFunc = jConclusion.getString("function");
     activeInter = inter;
   }
+
+  // exec
+  if (jConclusion.getString("exec") != null) {
+    MethodRelay mr = new MethodRelay(this, jConclusion.getString("exec"), Interactable.class);
+    mr.execute(inter);
+  }
 }
 
 void connectToPlane(Interactable inter, PVector mouse) {
   println("Function: connectToPlane");
-  
+
   for (Interactable i : interactables) {
     if (i != inter && i instanceof Plane) {
       if (i.visible && i.detectCollision(getCoords(mouse.x, mouse.y)) && !i.states.contains("HAT_TOWCAR")) {
         ((Plane)i).setTowCar((Vehicle)inter);
         ((Vehicle)inter).setPulledPlane((Plane)i);
-        
+
         i.addState("HAT_TOWCAR");
         inter.addState("HAT_FLUGZEUG");
-        
+
         println("Set " + ((Plane)i).towCar.name + " as towcar from " + i.name);
       }
     }
   }
 }
 
-void removeConnection(Interactable inter, PVector mouse) {
-  println("Function: removeConnection");
-  
+void removeConnection(Interactable inter) {
+  println("Execute: removeConnection");
+
   Vehicle v = (Vehicle)inter;
-  
+
   v.pulledPlane.towCar = null;
   v.pulledPlane = null;
 }

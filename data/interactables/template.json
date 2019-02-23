@@ -59,7 +59,8 @@
 					"h": ,
 					"d": 
 				},
-				"function": ""
+				"function": "function, which is called after another click",
+				"exec": "function, which is executed instantly"
 			}
 		}
 	]
