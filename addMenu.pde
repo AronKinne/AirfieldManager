@@ -65,15 +65,8 @@ void addMenu(Interactable inter, Interactable reference, Menu parentMenu, Object
 boolean checkStates(Interactable inter, JSONObject jCondition) {
   if (jCondition.getJSONArray("states") != null) {
     String[] states = toStringArray(jCondition.getJSONArray("states"));
-    int existingStates = 0;
-
-    for (String strSta : states) {
-      if (inter.states.contains(strSta)) {
-        existingStates++;
-      }
-    }
-
-    return existingStates == states.length;
+    
+    return inter.isState(states);
   }
 
   return true;
@@ -83,15 +76,8 @@ boolean checkStates(Interactable inter, JSONObject jCondition) {
 boolean checkNoStates(Interactable inter, JSONObject jCondition) {
   if (jCondition.getJSONArray("noStates") != null) {
     String[] states = toStringArray(jCondition.getJSONArray("noStates"));
-    int existingStates = 0;
-
-    for (String strSta : states) {
-      if (inter.states.contains(strSta)) {
-        existingStates++;
-      }
-    }
-
-    return existingStates == 0;
+    
+    return inter.isNoState(states);
   }
 
   return true;

@@ -3,7 +3,7 @@
 	"type": "vehicle",
 	"show": false,
 	"img": "data/images/traktor.png",
-	"speed": .2,
+	"speed": 0.2,
 	"states": [
 		"IN_KFZHALLE"
 	],

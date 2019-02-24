@@ -2,10 +2,13 @@ class Vehicle extends Interactable {
 
   Plane pulledPlane;
   PVector towPoint;
+  float ropeLen;
+  
   Vehicle(String name) {
     super(name);
 
     pulledPlane = null;
+    ropeLen = 30;
   }
 
   void draw() {

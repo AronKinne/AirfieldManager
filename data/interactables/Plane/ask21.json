@@ -2,6 +2,7 @@
 	"name": "ASK 21",
 	"type": "plane",
 	"show": false,
+	"speed": 0.05,
 	"states": [
 		"IN_HANGAR",
 		"HAT_KULLER"

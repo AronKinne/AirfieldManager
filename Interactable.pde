@@ -3,7 +3,7 @@ class Interactable {
   PVector pos, dest;
   float w, h;
   PImage img;
-  float dir, speed;
+  float dir, initSpeed, speed;
   boolean visible;
   String name, jsonPath;
   JSONArray jMenu;
@@ -21,6 +21,7 @@ class Interactable {
     pos = new PVector();
     dest = null;
     dir = 0;
+    initSpeed = 0;
     speed = 0;
     visible = true;
 
@@ -31,13 +32,18 @@ class Interactable {
 
     states = new ArrayList<String>();
   }
+  
+  void initSpeed(float s) {
+    initSpeed = s;
+    speed = s;
+  }
 
   void setDest(PVector d) {
-    dest = d.copy();
+    dest = d;
   }
 
   void addState(String s) {
-    if (!states.contains(s)) states.add(s);
+    if (isNoState(s)) states.add(s);
   }
 
   void addStates(String[] strSta) {
@@ -47,7 +53,7 @@ class Interactable {
   }
 
   void removeState(String s) {
-    if (states.contains(s)) states.remove(s);
+    if (isState(s)) states.remove(s);
   }
 
   void removeStates(String[] strSta) {
@@ -111,6 +117,28 @@ class Interactable {
   void setDirDeg(float d) {
     setDir(radians(d));
   }
+  
+  boolean isState(String... sta) {
+    boolean out = true;
+    for(String s : sta) {
+      if(!states.contains(s)) {
+         out = false;
+         break;
+      }
+    }
+    return out;
+  }
+  
+  boolean isNoState(String... sta) {
+    boolean out = true;
+    for(String s : sta) {
+      if(states.contains(s)) {
+         out = false;
+         break;
+      }
+    }
+    return out;
+  }
 
   boolean detectCollision(PVector mouse) {
     float s = sin(-dir);
@@ -151,6 +179,7 @@ class Interactable {
     if (dest != null) {
       if(PVector.dist(pos, dest) < speed) {
         dest = null;
+        speed = initSpeed;
         return;
       }
       

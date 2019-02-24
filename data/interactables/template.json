@@ -3,6 +3,7 @@
 	"type": "Plane/Interactable",
 	"img": "",
 	"show": false,
+	"speed": ,
 	"states": [
 		""
 	],

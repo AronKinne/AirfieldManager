@@ -19,9 +19,16 @@ void setup() {
   airfield = loadImage("data/images/airfield.png");
   airfield.resize(1600, 900);
 
+  /* DEFAULT
   centerX = width * .5;
   centerY = height * .5;
   zoom = 1;
+  */
+  
+  // TEST
+  centerX = 1381;
+  centerY = 117;
+  zoom = 2.9;
   
   activeFunc = "";
   activeInter = null;

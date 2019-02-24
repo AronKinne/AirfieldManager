@@ -21,13 +21,14 @@ void createInteractables(String folderPath) {
         case "vehicle":
           inter = new Vehicle(name);
           inter.setImage(jFile.getString("img"));
-          inter.speed = jFile.getFloat("speed");
           break;
         default:
           throw new RuntimeException();
         }
 
         inter.visible = jFile.getBoolean("show");
+
+        if(jFile.get("speed") != null) inter.initSpeed(jFile.getFloat("speed"));
 
         String[] states = toStringArray(jFile.getJSONArray("states"));
         inter.addStates(states);
@@ -37,7 +38,7 @@ void createInteractables(String folderPath) {
           inter.setBounds(jPos.getInt("x"), jPos.getInt("y"), jPos.getInt("w"), jPos.getInt("h"));
           inter.setDirDeg(jPos.getFloat("d"));
         }
-        
+
         inter.jMenu = jFile.getJSONArray("menu");
 
         inter.jsonPath = f.getPath();

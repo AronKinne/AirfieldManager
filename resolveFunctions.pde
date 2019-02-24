@@ -41,7 +41,7 @@ void connectToPlane(Interactable inter, PVector mouse) {
 
   for (Interactable i : interactables) {
     if (i != inter && i instanceof Plane) {
-      if (i.visible && i.detectCollision(getCoords(mouse.x, mouse.y)) && !i.states.contains("HAT_TOWCAR")) {
+      if (i.visible && i.detectCollision(getCoords(mouse.x, mouse.y)) && i.isNoState("HAT_TOWCAR") && PVector.dist(inter.pos, i.pos) <= ((Vehicle)inter).ropeLen) {
         ((Plane)i).setTowCar((Vehicle)inter);
         ((Vehicle)inter).setPulledPlane((Plane)i);
 
@@ -58,7 +58,18 @@ void goTo(Interactable inter, PVector mouse) {
   println("Function: goTo");
 
   if (inter instanceof Vehicle) {
-    inter.setDest(getCoords(mouse.x, mouse.y));
+    Vehicle v = (Vehicle)inter;
+
+    if (v.isState("HAT_FLUGZEUG")) {
+      Plane p = v.pulledPlane;
+      
+      if (p.isState("HAT_KULLER", "HAT_TOWCAR") && p.isNoState("IN_HANGAR")) {
+        v.speed = p.initSpeed;
+        v.setDest(getCoords(mouse.x, mouse.y));
+      }
+    } else {
+      inter.setDest(getCoords(mouse.x, mouse.y));
+    }
   }
 }
 
