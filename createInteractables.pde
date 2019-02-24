@@ -21,6 +21,7 @@ void createInteractables(String folderPath) {
         case "vehicle":
           inter = new Vehicle(name);
           inter.setImage(jFile.getString("img"));
+          inter.speed = jFile.getFloat("speed");
           break;
         default:
           throw new RuntimeException();

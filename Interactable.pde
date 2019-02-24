@@ -1,8 +1,9 @@
 class Interactable {
 
-  float x, y, w, h;
+  PVector pos, dest;
+  float w, h;
   PImage img;
-  float dir;
+  float dir, speed;
   boolean visible;
   String name, jsonPath;
   JSONArray jMenu;
@@ -17,15 +18,22 @@ class Interactable {
     this.name = name;
     setImage(imgPath);
 
+    pos = new PVector();
+    dest = null;
     dir = 0;
+    speed = 0;
     visible = true;
 
     interactables.add(this);
 
     jMenu = null;
-    menu = new Menu(name, x, y);
+    menu = new Menu(name, pos.x, pos.y);
 
     states = new ArrayList<String>();
+  }
+
+  void setDest(PVector d) {
+    dest = d.copy();
   }
 
   void addState(String s) {
@@ -63,8 +71,7 @@ class Interactable {
   }
 
   void setBounds(float x, float y, float w, float h) {
-    this.x = x;
-    this.y = y;
+    pos = new PVector(x, y);
     this.w = w;
     this.h = h;
 
@@ -109,12 +116,12 @@ class Interactable {
     float s = sin(-dir);
     float c = cos(-dir);
 
-    mouse.sub(new PVector(x, y));
+    mouse.sub(pos);
 
     float newX = mouse.x * c - mouse.y * s;
     float newY = mouse.x * s + mouse.y * c;
 
-    mouse = new PVector(newX, newY).add(new PVector(x, y));
+    mouse = new PVector(newX, newY).add(pos);
 
     /* DEBUG:
      stroke(255, 0, 0);
@@ -124,11 +131,11 @@ class Interactable {
      rect(x - w * .5, y - h * .5, w, h);
      */
 
-    return (mouse.x > x - w * .5 && mouse.x < x + w * .5 && mouse.y > y - h * .5 && mouse.y < y + h * .5);
+    return (mouse.x > pos.x - w * .5 && mouse.x < pos.x + w * .5 && mouse.y > pos.y - h * .5 && mouse.y < pos.y + h * .5);
   }
 
   void loadMenu() {
-    menu = new Menu(name, x, y);
+    menu = new Menu(name, pos.x, pos.y);
     addMenu(this, this, menu, toObjectArray(jMenu));
   }
 
@@ -140,11 +147,28 @@ class Interactable {
     }
   }
 
+  void goTo() {
+    if (dest != null) {
+      if(PVector.dist(pos, dest) < speed) {
+        dest = null;
+        return;
+      }
+      
+      PVector des = dest.copy().sub(pos);
+      des.setMag(speed);
+
+      dir = des.heading() + HALF_PI;
+      pos.add(des);
+    }
+  }
+
   void draw() {
+    goTo();
+
     if (visible) {
       if (img != null) {
         pushMatrix();
-        translate(x, y);
+        translate(pos.x, pos.y);
         rotate(dir);
         image(img, -w * .5, -h * .5);
         popMatrix();
@@ -153,7 +177,7 @@ class Interactable {
         strokeWeight(1 / zoom);
         noFill();
         pushMatrix();
-        translate(x, y);
+        translate(pos.x, pos.y);
         rotate(dir);
         rect(-w * .5, -h * .5, w, h);
         popMatrix();

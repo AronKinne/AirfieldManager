@@ -3,6 +3,7 @@
 	"type": "vehicle",
 	"show": false,
 	"img": "data/images/traktor.png",
+	"speed": .2,
 	"states": [
 		"IN_KFZHALLE"
 	],
@@ -44,7 +45,7 @@
 			}
 		},
 		{
-			"name": "Mit Flugzeug verbinden",
+			"name": "Verbinden mit Flugzeug...",
 			"if": {
 				"noStates": [
 					"IN_KFZHALLE",
@@ -70,6 +71,17 @@
 				"remStates": [
 					"HAT_FLUGZEUG"
 				]
+			}
+		},
+		{
+			"name": "Fahre zu...",
+			"if": {
+				"noStates": [
+					"IN_KFZHALLE"
+				]
+			},
+			"then": {
+				"function": "goTo"
 			}
 		}
 	]

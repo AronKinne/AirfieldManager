@@ -35,6 +35,7 @@ void resolve(Interactable inter, JSONObject jConclusion) {
   }
 }
 
+// JSON Functions
 void connectToPlane(Interactable inter, PVector mouse) {
   println("Function: connectToPlane");
 
@@ -53,6 +54,15 @@ void connectToPlane(Interactable inter, PVector mouse) {
   }
 }
 
+void goTo(Interactable inter, PVector mouse) {
+  println("Function: goTo");
+
+  if (inter instanceof Vehicle) {
+    inter.setDest(getCoords(mouse.x, mouse.y));
+  }
+}
+
+// JSON Executes
 void removeConnection(Interactable inter) {
   println("Execute: removeConnection");
 
