@@ -22,8 +22,10 @@ class Vehicle extends Interactable {
   void checkApron() {
     if(visible && apron.detectCollision(pos.copy())) {
        addState("IN_APRON");
+       apron.addState("HAT_VEHICLE");
     } else {
        removeState("IN_APRON"); 
+       apron.removeState("HAT_VEHICLE");
     }
   }
 

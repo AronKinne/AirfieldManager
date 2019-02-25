@@ -14,7 +14,13 @@
 				"states": [
 					"IN_HANGAR",
 					"HAT_KULLER"
-				]
+				],
+				"object": {
+					"path": "data/interactables/Interactable/vorfeld.json",
+					"noStates": [
+						"HAT_FLUGZEUG"
+					]
+				}
 			},
 			"then": {
 				"remStates": [

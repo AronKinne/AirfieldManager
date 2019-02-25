@@ -41,7 +41,7 @@ void connectToPlane(Interactable inter, PVector mouse) {
 
   for (Interactable i : interactables) {
     if (i != inter && i instanceof Plane) {
-      if (i.visible && i.detectCollision(getCoords(mouse.x, mouse.y)) && i.isNoState("HAT_TOWCAR") && PVector.dist(inter.pos, i.pos) <= ((Vehicle)inter).ropeLen) {
+      if (i.visible && i.detectCollision(getCoords(mouse.x, mouse.y)) && i.isNoState("HAT_TOWCAR") && PVector.dist(((Vehicle)inter).towPoint, ((Plane)i).towPoint) <= ((Vehicle)inter).ropeLen) {
         ((Plane)i).setTowCar((Vehicle)inter);
         ((Vehicle)inter).setPulledPlane((Plane)i);
 

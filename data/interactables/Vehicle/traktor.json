@@ -13,7 +13,13 @@
 			"if": {
 				"states": [
 					"IN_KFZHALLE"
-				]
+				],
+				"object": {
+					"path": "data/interactables/Interactable/vorfeld.json",
+					"noStates": [
+						"HAT_VEHICLE"
+					]
+				}
 			},
 			"then": {
 				"remStates": [

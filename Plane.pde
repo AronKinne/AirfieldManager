@@ -25,8 +25,10 @@ class Plane extends Interactable {
   void checkApron() {
     if(visible && apron.detectCollision(pos.copy())) {
        addState("IN_APRON"); 
+       apron.addState("HAT_FLUGZEUG");
     } else {
        removeState("IN_APRON"); 
+       apron.removeState("HAT_FLUGZEUG");
     }
   }
   
@@ -35,7 +37,7 @@ class Plane extends Interactable {
   }
   
   void followTowCar() {
-    if(PVector.dist(pos, towCar.pos) > towCar.ropeLen) {
+    if(PVector.dist(towPoint, towCar.towPoint) > towCar.ropeLen) {
       setDest(towCar.towPoint);
     } else {
       setDest(null); 
