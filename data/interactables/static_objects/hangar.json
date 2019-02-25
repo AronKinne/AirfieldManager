@@ -18,10 +18,10 @@
 			"menu": [
 				{
 					"name": "ASK 21",
-					"object": "data/interactables/Plane/ask21.json",
+					"object": "data/interactables/planes/ask_21.json",
 					"if": {
 						"object": {
-							"path": "data/interactables/Plane/ask21.json",
+							"path": "data/interactables/planes/ask_21.json",
 							"states": [
 								"IN_HANGAR"
 							]

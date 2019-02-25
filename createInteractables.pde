@@ -1,5 +1,5 @@
 void createInteractables(String folderPath) {
-  File[] files = getFiles(folderPath, "/Interactable/", "/Plane/", "/Vehicle/");
+  File[] files = getFiles(folderPath, "static_objects", "planes", "vehicles");
   println();
 
   for (File f : files) {
@@ -75,7 +75,7 @@ String[] toStringArray(JSONArray jArray) {
 File[] getFiles(String folderPath, String... underFolderPaths) {
   ArrayList<File> fileList = new ArrayList<File>();
   for (String path : underFolderPaths) {
-    fileList.addAll(Arrays.asList(listFiles(folderPath + path)));
+    fileList.addAll(Arrays.asList(listFiles(folderPath + "\\" + path)));
   }
 
   File[] files = new File[fileList.size()];

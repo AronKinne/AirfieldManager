@@ -24,10 +24,10 @@
 				"Escort",
 				{
 					"name": "Traktor",
-					"object": "data/interactables/Vehicle/traktor.json",
+					"object": "data/interactables/vehicles/traktor.json",
 					"if": {
 						"object": {
-							"path": "data/interactables/Vehicle/traktor.json",
+							"path": "data/interactables/vehicles/traktor.json",
 							"states": [
 								"IN_KFZHALLE"
 							]

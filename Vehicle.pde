@@ -8,7 +8,7 @@ class Vehicle extends Interactable {
     super(name);
 
     pulledPlane = null;
-    ropeLen = 30;
+    ropeLen = 20;
   }
 
   void draw() {

@@ -16,7 +16,7 @@
 					"HAT_KULLER"
 				],
 				"object": {
-					"path": "data/interactables/Interactable/vorfeld.json",
+					"path": "data/interactables/static_objects/vorfeld.json",
 					"noStates": [
 						"HAT_FLUGZEUG"
 					]
