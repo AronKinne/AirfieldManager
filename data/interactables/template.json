@@ -15,54 +15,8 @@
 		"d": 
 	},
 	"menu": [
-		"",
 		{
-			"name": "",
-			"menu": [
-				"",
-			]
-		},
-		{
-			"name": "",
-			"object": ".json"
-		},
-		{
-			"name": "",
-			"if": {
-				"states": [
-					""
-				],
-				"noStates": [
-					""
-				],
-				"object": {
-					"path": "",
-					"states": [
-						""
-					],
-					"noStates": [
-						""
-					]
-				}
-			},
-			"then": {
-				"remStates": [
-					""
-				],
-				"addStates": [
-					""
-				],
-				"show": ,
-				"pos": {
-					"x": ,
-					"y": ,
-					"w": ,
-					"h": ,
-					"d": 
-				},
-				"function": "function, which is called after another click",
-				"exec": "function, which is executed instantly"
-			}
+			"name": ""
 		}
 	]
 }

@@ -1,0 +1,72 @@
+{
+	"name": "name (String)",
+	"type": "Plane|Vehicle|Interactable (String)",
+	"img": "img-path (String) [optional, not used for type Plane]",
+	"show": "true|false (Boolean)",
+	"speed": "initial speed (Float) [optional]",
+	"states": [
+		"array of states (String) [minimum 1]"
+	],
+	"pos": {
+		"x": "x position of center (Float)",
+		"y": "y position of center (Float)",
+		"w": "width (Float)",
+		"h": "height (Float)",
+		"d": "angle in degrees (Float)"
+	},
+	"menu": [
+		"array of menu entrys (following types) [minimum 1]",
+		"empty subitem (String) [optional]"
+		{
+			"name": "name of new subitem (String)",
+			"menu": [
+				"array of subitems of similar type [optional]",
+			]
+		},
+		{
+			"name": "name of new subitem with reference to existing json menu (String)",
+			"object": "file path of json object (String) [optional]"
+		},
+		{
+			"name": "name of new subitem with conditions to show up (String)",
+			"if": {
+				"states": [
+					"list of states, which this object must have (String) [optional]"
+				],
+				"noStates": [
+					"list of states, which this object must not have (String) [optional]"
+				],
+				"object": {
+					"path": "path to json object as reference (String)",
+					"states": [
+						"list of states, which the reference must have (String) [optional]"
+					],
+					"noStates": [
+						"list of states, which the reference must not have (String) [optional]"
+					]
+				}
+			}
+		},
+		{
+			"name": "name of new subitem with conclusions to execute (String)"
+			"then": {
+				"remStates": [
+					"list of states, which get removed from this object (String) [optional]"
+				],
+				"addStates": [
+					"list of states, which get added to this object (String) [optional]"
+				],
+				"show": "true|false (Boolean) [optional]",
+				"pos": {
+					"x": "new x position of center (Float)",
+					"y": "new y position of center (Float)",
+					"w": "new width (Float)",
+					"h": "new height (Float)",
+					"d": "new angle in degrees (Float)"
+				},
+				"function": "name of function, which is called in Processing after another click (String) [optional]",
+				"exec": "name of function, which is executed in Processing instantly (String) [optional]"
+			}
+		}
+	]
+}
