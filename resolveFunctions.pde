@@ -62,7 +62,7 @@ void goTo(Interactable inter, PVector mouse) {
 
     if (v.isState("HAT_FLUGZEUG")) {
       Plane p = v.pulledPlane;
-      
+
       if (p.isState("HAT_KULLER", "HAT_TOWCAR") && p.isNoState("IN_HANGAR")) {
         v.speed = p.initSpeed;
         v.setDest(getCoords(mouse.x, mouse.y));
@@ -77,8 +77,29 @@ void goTo(Interactable inter, PVector mouse) {
 void removeConnection(Interactable inter) {
   println("Execute: removeConnection");
 
-  Vehicle v = (Vehicle)inter;
+  if (inter instanceof Vehicle) {
+    Vehicle v = (Vehicle)inter;
 
-  v.pulledPlane.towCar = null;
-  v.pulledPlane = null;
+    if (v.isState("UNTERWEGS")) {
+      v.pulledPlane.setDest(null);
+      v.speed = v.initSpeed;
+    }
+
+    v.pulledPlane.towCar = null;
+    v.pulledPlane.removeState("HAT_TOWCAR");
+    v.removeState("HAT_FLUGZEUG");
+    v.pulledPlane = null;
+  } else if(inter instanceof Plane) {
+    Plane p = (Plane)inter; 
+
+    if (p.towCar.isState("UNTERWEGS")) {
+      p.setDest(null);
+      p.towCar.speed = p.towCar.initSpeed;
+    }
+
+    p.towCar.pulledPlane = null;
+    p.towCar.removeState("HAT_FLUGZEUG");
+    p.removeState("HAT_TOWCAR");
+    p.towCar = null;
+  }
 }

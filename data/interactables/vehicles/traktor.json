@@ -58,7 +58,8 @@
 			"if": {
 				"noStates": [
 					"IN_KFZHALLE",
-					"HAT_FLUGZEUG"
+					"HAT_FLUGZEUG",
+					"UNTERWEGS"
 				]
 			},
 			"then": {
@@ -72,14 +73,11 @@
 					"HAT_FLUGZEUG"
 				],
 				"noStates": [
-					"IN_HANGAR"
+					"IN_KFZHALLE"
 				]
 			},
 			"then": {
-				"exec": "removeConnection",
-				"remStates": [
-					"HAT_FLUGZEUG"
-				]
+				"exec": "removeConnection"
 			}
 		},
 		{

@@ -59,7 +59,8 @@
 			"name": "Aufkullern",
 			"if": {
 				"noStates": [
-					"HAT_KULLER"
+					"HAT_KULLER",
+					"UNTERWEGS"
 				]
 			},
 			"then": {
@@ -73,6 +74,9 @@
 			"if": {
 				"states": [
 					"HAT_KULLER"
+				],
+				"noStates": [
+					"UNTERWEGS"
 				]
 			},
 			"then": {
@@ -86,12 +90,13 @@
 			"if": {
 				"states": [
 					"HAT_TOWCAR"
+				],
+				"noStates": [
+					"IN_HANGAR"
 				]
 			},
 			"then": {
-				"remStates": [
-					"HAT_TOWCAR"
-				]
+				"exec": "removeConnection"
 			}
 		}
 	]

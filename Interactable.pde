@@ -186,6 +186,8 @@ class Interactable {
 
   void goTo() {
     if (dest != null) {
+      addState("UNTERWEGS");
+      
       if(PVector.dist(pos, dest) < speed) {
         dest = null;
         speed = initSpeed;
@@ -197,6 +199,8 @@ class Interactable {
 
       dir = des.heading() + HALF_PI;
       pos.add(des);
+    } else {
+      removeState("UNTERWEGS"); 
     }
   }
 
