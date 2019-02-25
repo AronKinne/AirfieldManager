@@ -13,8 +13,18 @@ class Vehicle extends Interactable {
 
   void draw() {
     super.draw();
+    
+    if(apron != null) checkApron();
 
     towPoint = PVector.add(pos, PVector.fromAngle(dir + HALF_PI).mult(h * .5));
+  }
+  
+  void checkApron() {
+    if(visible && apron.detectCollision(pos.copy())) {
+       addState("IN_APRON");
+    } else {
+       removeState("IN_APRON"); 
+    }
   }
 
   void setPulledPlane(Plane pp) {

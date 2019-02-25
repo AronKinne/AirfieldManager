@@ -1,6 +1,6 @@
 {
 	"name": "",
-	"type": "Plane/Interactable",
+	"type": "Plane/Vehicle/Interactable",
 	"img": "",
 	"show": false,
 	"speed": ,

@@ -35,6 +35,9 @@
 				"noStates": [
 					"IN_KFZHALLE",
 					"HAT_FLUGZEUG"
+				],
+				"states": [
+					"IN_APRON"
 				]
 			},
 			"then": {

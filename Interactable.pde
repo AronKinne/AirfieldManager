@@ -109,6 +109,15 @@ class Interactable {
       println("ERROR: Could not add function to menu with name: " + parentMenu.title);
     }
   }
+  
+  void log() {
+    println("Log of:", name);
+    println("X:", pos.x, "Y:", pos.y, "W:", w, "H:", h, "D:", dir);
+    println("States:", states);
+    println("Visibile:", visible);
+    if(img != null) println("Image loaded");
+    println("Dest:", dest);
+  }
 
   void setDir(float d) {
     dir = d;

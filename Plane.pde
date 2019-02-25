@@ -12,11 +12,21 @@ class Plane extends Interactable {
   void draw() {
     super.draw();
     
+    if(apron != null) checkApron();
+    
     towPoint = PVector.sub(pos, PVector.fromAngle(dir + HALF_PI).mult(h * .5));
     
     if(towCar != null) {
        line(towPoint.x, towPoint.y, towCar.towPoint.x, towCar.towPoint.y);
        followTowCar();
+    }
+  }
+  
+  void checkApron() {
+    if(visible && apron.detectCollision(pos.copy())) {
+       addState("IN_APRON"); 
+    } else {
+       removeState("IN_APRON"); 
     }
   }
   
@@ -26,7 +36,7 @@ class Plane extends Interactable {
   
   void followTowCar() {
     if(PVector.dist(pos, towCar.pos) > towCar.ropeLen) {
-      setDest(towCar.pos);
+      setDest(towCar.towPoint);
     } else {
       setDest(null); 
     }

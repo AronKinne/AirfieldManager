@@ -34,12 +34,6 @@ void mousePressed() {
       if (!currentMenu.mousePressed()) currentMenu = null;
     }
   } else if (mouseButton == RIGHT) {
-    println();
-    for (Interactable i : interactables) {
-      print(i.name + ": ");
-      for (String s : i.states) print(s + " ");
-      println();
-    }
     println(getCoords(mouseX, mouseY));
   }
 }

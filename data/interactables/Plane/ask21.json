@@ -34,7 +34,8 @@
 			"name": "In Hangar räumen",
 			"if": {
 				"states": [
-					"HAT_KULLER"
+					"HAT_KULLER",
+					"IN_APRON"
 				],
 				"noStates": [
 					"IN_HANGAR",

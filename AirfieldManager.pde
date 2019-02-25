@@ -6,7 +6,7 @@ PImage airfield;
 ArrayList<Interactable> interactables;
 Menu currentMenu;
 String activeFunc;
-Interactable activeInter;
+Interactable activeInter, apron;
 
 void setup() {
   size(1600, 900, P2D);

@@ -42,6 +42,8 @@ void createInteractables(String folderPath) {
         inter.jMenu = jFile.getJSONArray("menu");
 
         inter.jsonPath = f.getPath();
+        
+        if(inter.isState("APRON")) apron = inter;
       } 
       catch(Exception e) {
         if (interactables.contains(inter)) interactables.remove(inter);
