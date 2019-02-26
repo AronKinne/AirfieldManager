@@ -1,10 +1,9 @@
-class Carryable {
+class Carryable extends Interactable {
   
-  String name;
   Interactable owner;
   
-  Carryable(String name) {
-    this.name = name;
+  Carryable(String name, String imgPath) {
+    super(name, imgPath);
   }
   
 }

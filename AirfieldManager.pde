@@ -14,10 +14,12 @@ void setup() {
   smooth();
 
   interactables = new ArrayList<Interactable>();
-  createInteractables("data/interactables");
-  
   carryables = new ArrayList<Carryable>();
-  createCarryables("data/carryables");
+  
+  // Interactables
+  createInteractables(getFiles("data/interactables", "static_objects", "planes", "vehicles"));
+  // Carryables
+  createInteractables(getFiles("data/interactables", "carryables"));
   
   currentMenu = null;
 

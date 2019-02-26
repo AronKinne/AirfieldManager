@@ -29,8 +29,6 @@ class Interactable {
     menu = new Menu(name, pos.x, pos.y);
 
     states = new ArrayList<String>();
-
-    interactables.add(this);
   }
 
   void initSpeed(float s) {

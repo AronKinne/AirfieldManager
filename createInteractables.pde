@@ -1,6 +1,4 @@
-void createInteractables(String folderPath) {
-  File[] files = getFiles(folderPath, "static_objects", "planes", "vehicles");
-
+void createInteractables(File[] files) {
   for (File f : files) {
     if (f.getAbsolutePath().endsWith(".json")) {
       Interactable inter = null;
@@ -19,6 +17,8 @@ void createInteractables(String folderPath) {
         case "vehicle":
           inter = new Vehicle(name, jFile.getString("img"));
           break;
+        case "carryable":
+          inter = new Carryable(name, jFile.getString("img"));
         default:
           throw new RuntimeException();
         }
@@ -41,15 +41,20 @@ void createInteractables(String folderPath) {
         inter.jsonPath = f.getPath();
 
         if (inter.isState("APRON")) apron = inter;
+
+        if (inter instanceof Carryable) {
+          Carryable carry = (Carryable)inter;
+          
+          carryables.add(carry);
+        } else {
+          interactables.add(inter);
+        }
       } 
       catch(Exception e) {
         if (interactables.contains(inter)) interactables.remove(inter);
+        if (carryables.contains(inter)) carryables.remove(inter);
         println("ERROR: Could not load file " + f.getPath());
       }
     }
   }
-}
-
-void createCarryables(String folderPath) {
-  File[] files = listFiles(folderPath);
 }
