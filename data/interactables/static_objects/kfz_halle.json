@@ -36,6 +36,14 @@
 				}
 			]
 		},
-		"Akkus"
+		{
+			"name": "Akkus",
+			"menu": [
+				{
+					"name": "Akku in Flugzeug legen...",
+					"function": "accuInPlane"
+				}
+			]
+		}
 	]
 }

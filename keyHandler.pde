@@ -1,7 +1,6 @@
 ArrayList<Integer> pressedKeys = new ArrayList<Integer>();
 
 void keyHandler() {
-
   if (pressedKeys.contains(LEFT)) centerX -= 10 / zoom;
   if (pressedKeys.contains(RIGHT)) centerX += 10 / zoom;
   if (pressedKeys.contains(UP)) centerY -= 10 / zoom;

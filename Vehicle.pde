@@ -4,8 +4,8 @@ class Vehicle extends Interactable {
   PVector towPoint;
   float ropeLen;
   
-  Vehicle(String name) {
-    super(name);
+  Vehicle(String name, String imgPath) {
+    super(name, imgPath);
 
     pulledPlane = null;
     ropeLen = 20;

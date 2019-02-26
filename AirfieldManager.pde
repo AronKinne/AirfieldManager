@@ -4,6 +4,7 @@ import java.util.Arrays;
 float centerX, centerY, zoom;
 PImage airfield;
 ArrayList<Interactable> interactables;
+ArrayList<Carryable> carryables;
 Menu currentMenu;
 String activeFunc;
 Interactable activeInter, apron;
@@ -14,6 +15,10 @@ void setup() {
 
   interactables = new ArrayList<Interactable>();
   createInteractables("data/interactables");
+  
+  carryables = new ArrayList<Carryable>();
+  createCarryables("data/carryables");
+  
   currentMenu = null;
 
   airfield = loadImage("data/images/airfield.png");
@@ -64,16 +69,4 @@ void zoom(float x, float y, float z) {
   translate(width, height);
   scale(z);
   translate(-width / zoom * .5 - x, -height / zoom * .5 - y);
-}
-
-PVector getCoords(float x, float y) {
-  float outX = -width * .5 / zoom + centerX + x / zoom;
-  float outY = -height * .5 / zoom + centerY + y / zoom;
-  return new PVector(outX, outY);
-}
-
-PVector getPixels(float x, float y) {
-  float outX = width * .5 - centerX * zoom + x * zoom;
-  float outY = height * .5 - centerY * zoom + y * zoom;
-  return new PVector(outX, outY);
 }

@@ -1,6 +1,5 @@
 void createInteractables(String folderPath) {
   File[] files = getFiles(folderPath, "static_objects", "planes", "vehicles");
-  println();
 
   for (File f : files) {
     if (f.getAbsolutePath().endsWith(".json")) {
@@ -12,15 +11,13 @@ void createInteractables(String folderPath) {
 
         switch(jFile.getString("type").toLowerCase()) {
         case "interactable": 
-          inter = new Interactable(name);
-          inter.setImage(jFile.getString("img"));
+          inter = new Interactable(name, jFile.getString("img"));
           break;
         case "plane":
           inter = new Plane(name);
           break;
         case "vehicle":
-          inter = new Vehicle(name);
-          inter.setImage(jFile.getString("img"));
+          inter = new Vehicle(name, jFile.getString("img"));
           break;
         default:
           throw new RuntimeException();
@@ -28,7 +25,7 @@ void createInteractables(String folderPath) {
 
         inter.visible = jFile.getBoolean("show");
 
-        if(jFile.get("speed") != null) inter.initSpeed(jFile.getFloat("speed"));
+        if (jFile.get("speed") != null) inter.initSpeed(jFile.getFloat("speed"));
 
         String[] states = toStringArray(jFile.getJSONArray("states"));
         inter.addStates(states);
@@ -42,8 +39,8 @@ void createInteractables(String folderPath) {
         inter.jMenu = jFile.getJSONArray("menu");
 
         inter.jsonPath = f.getPath();
-        
-        if(inter.isState("APRON")) apron = inter;
+
+        if (inter.isState("APRON")) apron = inter;
       } 
       catch(Exception e) {
         if (interactables.contains(inter)) interactables.remove(inter);
@@ -53,32 +50,6 @@ void createInteractables(String folderPath) {
   }
 }
 
-Object[] toObjectArray(JSONArray jArray) {
-  ArrayList<Object> list = new ArrayList<Object>(); 
-  for (int i = 0; i < jArray.size(); i++) { 
-    list.add(jArray.get(i));
-  }
-
-  Object[] out = new Object[list.size()];
-  for (int i = 0; i < list.size(); i++) { 
-    out[i] = list.get(i);
-  }
-
-  return out;
-}
-
-String[] toStringArray(JSONArray jArray) {
-  Object[] oStates = toObjectArray(jArray);
-  return Arrays.copyOf(oStates, oStates.length, String[].class);
-}
-
-File[] getFiles(String folderPath, String... underFolderPaths) {
-  ArrayList<File> fileList = new ArrayList<File>();
-  for (String path : underFolderPaths) {
-    fileList.addAll(Arrays.asList(listFiles(folderPath + "\\" + path)));
-  }
-
-  File[] files = new File[fileList.size()];
-  for (int i = 0; i < files.length; i++) files[i] = fileList.get(i);
-  return files;
+void createCarryables(String folderPath) {
+  File[] files = listFiles(folderPath);
 }

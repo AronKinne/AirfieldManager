@@ -39,17 +39,20 @@ void resolve(Interactable inter, JSONObject jConclusion) {
 void connectToPlane(Interactable inter, PVector mouse) {
   println("Function: connectToPlane");
 
-  for (Interactable i : interactables) {
-    if (i != inter && i instanceof Plane) {
-      if (i.visible && i.detectCollision(getCoords(mouse.x, mouse.y)) && i.isNoState("HAT_TOWCAR") && PVector.dist(((Vehicle)inter).towPoint, ((Plane)i).towPoint) <= ((Vehicle)inter).ropeLen) {
-        ((Plane)i).setTowCar((Vehicle)inter);
-        ((Vehicle)inter).setPulledPlane((Plane)i);
+  Interactable i = getInteractable(getCoords(mouse.x, mouse.y));
 
-        i.addState("HAT_TOWCAR");
-        inter.addState("HAT_FLUGZEUG");
+  if (i != inter && i instanceof Plane) {
+    Plane p = (Plane)i;
+    Vehicle v = (Vehicle)inter;
+    
+    if (p.isNoState("HAT_TOWCAR") && PVector.dist(v.towPoint, p.towPoint) <= v.ropeLen) {
+      p.setTowCar(v);
+      v.setPulledPlane(p);
 
-        println("Set " + ((Plane)i).towCar.name + " as towcar from " + i.name);
-      }
+      p.addState("HAT_TOWCAR");
+      inter.addState("HAT_FLUGZEUG");
+
+      println("Set " + p.towCar.name + " as towcar from " + p.name);
     }
   }
 }
@@ -73,6 +76,10 @@ void goTo(Interactable inter, PVector mouse) {
   }
 }
 
+void accuInPlane(Interactable inter, PVector mouse) {
+  println("Function: accuInPlane");
+}
+
 // JSON Executes
 void removeConnection(Interactable inter) {
   println("Execute: removeConnection");
@@ -89,7 +96,7 @@ void removeConnection(Interactable inter) {
     v.pulledPlane.removeState("HAT_TOWCAR");
     v.removeState("HAT_FLUGZEUG");
     v.pulledPlane = null;
-  } else if(inter instanceof Plane) {
+  } else if (inter instanceof Plane) {
     Plane p = (Plane)inter; 
 
     if (p.towCar.isState("UNTERWEGS")) {

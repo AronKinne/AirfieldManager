@@ -25,14 +25,14 @@ class Interactable {
     speed = 0;
     visible = true;
 
-    interactables.add(this);
-
     jMenu = null;
     menu = new Menu(name, pos.x, pos.y);
 
     states = new ArrayList<String>();
+
+    interactables.add(this);
   }
-  
+
   void initSpeed(float s) {
     initSpeed = s;
     speed = s;
@@ -109,13 +109,13 @@ class Interactable {
       println("ERROR: Could not add function to menu with name: " + parentMenu.title);
     }
   }
-  
+
   void log() {
     println("Log of:", name);
     println("X:", pos.x, "Y:", pos.y, "W:", w, "H:", h, "D:", dir);
     println("States:", states);
     println("Visibile:", visible);
-    if(img != null) println("Image loaded");
+    if (img != null) println("Image loaded");
     println("Dest:", dest);
   }
 
@@ -126,30 +126,30 @@ class Interactable {
   void setDirDeg(float d) {
     setDir(radians(d));
   }
-  
+
   boolean isState(String... sta) {
     boolean out = true;
-    for(String s : sta) {
-      if(!states.contains(s)) {
-         out = false;
-         break;
-      }
-    }
-    return out;
-  }
-  
-  boolean isNoState(String... sta) {
-    boolean out = true;
-    for(String s : sta) {
-      if(states.contains(s)) {
-         out = false;
-         break;
+    for (String s : sta) {
+      if (!states.contains(s)) {
+        out = false;
+        break;
       }
     }
     return out;
   }
 
-  boolean detectCollision(PVector mouse) {
+  boolean isNoState(String... sta) {
+    boolean out = true;
+    for (String s : sta) {
+      if (states.contains(s)) {
+        out = false;
+        break;
+      }
+    }
+    return out;
+  }
+
+  boolean detectCollision(PVector mouse) {    
     float s = sin(-dir);
     float c = cos(-dir);
 
@@ -187,20 +187,20 @@ class Interactable {
   void goTo() {
     if (dest != null) {
       addState("UNTERWEGS");
-      
-      if(PVector.dist(pos, dest) < speed) {
+
+      if (PVector.dist(pos, dest) < speed) {
         dest = null;
         speed = initSpeed;
         return;
       }
-      
+
       PVector des = dest.copy().sub(pos);
       des.setMag(speed);
 
       dir = des.heading() + HALF_PI;
       pos.add(des);
     } else {
-      removeState("UNTERWEGS"); 
+      removeState("UNTERWEGS");
     }
   }
 
