@@ -1,0 +1,13 @@
+{
+	"name": "Akku",
+	"type": "Carryable",
+	"show": false,
+	"owner": "data/interactables/static_objects/kfz_halle.json",
+	"amount": 5,
+	"states": [
+		"AKKU"
+	],
+	"menu": [
+		""
+	]
+}

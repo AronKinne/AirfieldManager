@@ -19,6 +19,7 @@ void createInteractables(File[] files) {
           break;
         case "carryable":
           inter = new Carryable(name, jFile.getString("img"));
+          break;
         default:
           throw new RuntimeException();
         }
@@ -44,8 +45,14 @@ void createInteractables(File[] files) {
 
         if (inter instanceof Carryable) {
           Carryable carry = (Carryable)inter;
-          
-          carryables.add(carry);
+
+          carry.owner = getInteractable(jFile.getString("owner"));
+
+          int amt = 1;
+          if (jFile.get("amount") != null) amt = jFile.getInt("amount");
+          for (int i = 0; i < amt; i++) {
+            carryables.add(carry);
+          }
         } else {
           interactables.add(inter);
         }
