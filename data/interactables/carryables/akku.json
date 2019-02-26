@@ -2,7 +2,12 @@
 	"name": "Akku",
 	"type": "Carryable",
 	"show": false,
-	"owner": "data/interactables/static_objects/kfz_halle.json",
+	"owner": {
+		"path": "data/interactables/static_objects/kfz_halle.json",
+		"addStates": [
+			"HAT_AKKU"
+		]
+	},
 	"amount": 5,
 	"states": [
 		"AKKU"

@@ -4,7 +4,6 @@ import java.util.Arrays;
 float centerX, centerY, zoom;
 PImage airfield;
 ArrayList<Interactable> interactables;
-ArrayList<Carryable> carryables;
 Menu currentMenu;
 String activeFunc;
 Interactable activeInter, apron;
@@ -14,12 +13,13 @@ void setup() {
   smooth();
 
   interactables = new ArrayList<Interactable>();
-  carryables = new ArrayList<Carryable>();
   
   // Interactables
   createInteractables(getFiles("data/interactables", "static_objects", "planes", "vehicles"));
   // Carryables
   createInteractables(getFiles("data/interactables", "carryables"));
+  
+  //for(Interactable i : interactables) i.log();
   
   currentMenu = null;
 
@@ -50,7 +50,7 @@ void draw() {
   text("", 0, 0);
 
   image(airfield, 0, 0);
-  for (Interactable i : interactables) if(i.visible) i.draw();
+  for (Interactable i : interactables) i.draw();
 
   if (currentMenu != null) {
     currentMenu.draw();

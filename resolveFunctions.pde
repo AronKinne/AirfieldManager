@@ -44,8 +44,8 @@ void connectToPlane(Interactable inter, PVector mouse) {
   if (i != inter && i instanceof Plane) {
     Plane p = (Plane)i;
     Vehicle v = (Vehicle)inter;
-    
-    if (p.isNoState("HAT_TOWCAR") && PVector.dist(v.towPoint, p.towPoint) <= v.ropeLen) {
+
+    if (p.isNoState("HAT_TOWCAR") && inRange(p, v)) {
       p.setTowCar(v);
       v.setPulledPlane(p);
 
@@ -76,8 +76,30 @@ void goTo(Interactable inter, PVector mouse) {
   }
 }
 
-void accuInPlane(Interactable inter, PVector mouse) {
-  println("Function: accuInPlane");
+void moveAccuTo(Interactable inter, PVector mouse) {
+  println("Function: moveAccuTo");
+
+  Interactable i = getInteractable(getCoords(mouse.x, mouse.y));
+  String ha = "HAT_AKKU";
+
+  if ((inter instanceof Vehicle || inter instanceof Plane) && (i instanceof Plane || i instanceof Vehicle)) {
+    if (inter.isState(ha) && i.isNoState(ha) && inRange(inter, i)) {
+      i.addState(ha);
+      inter.removeState(ha);
+    }
+  } else if (inter.isState("STATIC") && (i instanceof Plane || i instanceof Vehicle)) {    
+    if (inter.isState(ha) && i.isNoState(ha) && i.isState("IN_APRON")) {
+      i.addState(ha);
+      inter.removeCarryable("AKKU");
+      if (!inter.isCarryable("AKKU")) inter.removeState(ha);
+    }
+  } else if ((inter instanceof Plane || inter instanceof Vehicle) && i.name.equals("KFZ-Halle")) {  
+    if (inter.isState(ha, "IN_APRON")) {
+      inter.removeState(ha);
+      i.addState(ha);
+      i.addCarryable("AKKU");
+    }
+  }
 }
 
 // JSON Executes

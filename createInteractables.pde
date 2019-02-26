@@ -46,20 +46,21 @@ void createInteractables(File[] files) {
         if (inter instanceof Carryable) {
           Carryable carry = (Carryable)inter;
 
-          carry.owner = getInteractable(jFile.getString("owner"));
+          JSONObject jOwner = jFile.getJSONObject("owner");
+          carry.owner = getInteractable(jOwner.getString("path"));
+          
+          if(jOwner.getJSONArray("addStates") != null) carry.owner.addStates(toStringArray(jOwner.getJSONArray("addStates")));
 
           int amt = 1;
           if (jFile.get("amount") != null) amt = jFile.getInt("amount");
           for (int i = 0; i < amt; i++) {
-            carryables.add(carry);
+            carry.owner.carryables.add(carry);
           }
-        } else {
-          interactables.add(inter);
         }
       } 
       catch(Exception e) {
         if (interactables.contains(inter)) interactables.remove(inter);
-        if (carryables.contains(inter)) carryables.remove(inter);
+        //if (carryables.contains(inter)) carryables.remove(inter);
         println("ERROR: Could not load file " + f.getPath());
       }
     }

@@ -9,6 +9,7 @@ class Interactable {
   JSONArray jMenu;
   Menu menu;
   ArrayList<String> states;
+  ArrayList<Carryable> carryables;
 
   Interactable(String name) {
     this(name, null);
@@ -29,6 +30,9 @@ class Interactable {
     menu = new Menu(name, pos.x, pos.y);
 
     states = new ArrayList<String>();
+    carryables = new ArrayList<Carryable>();
+
+    interactables.add(this);
   }
 
   void initSpeed(float s) {
@@ -58,6 +62,35 @@ class Interactable {
     for (String s : strSta) {
       removeState(s);
     }
+  }
+
+  void addCarryable(String state) {
+    for (Interactable i : interactables) {
+      if (i instanceof Carryable && i.isState(state)) {
+        carryables.add((Carryable)i);
+        break;
+      }
+    }
+  }
+
+  void removeCarryable(String state) {
+    for (Interactable i : interactables) {
+      if (i instanceof Carryable && i.isState(state)) {
+        if (carryables.contains(i)) {
+          carryables.remove(i);
+          break;
+        }
+      }
+    }
+  }
+
+  boolean isCarryable(String state) {
+    for (Interactable i : interactables) {
+      if (i instanceof Carryable && i.isState(state)) {
+        if (carryables.contains(i)) return true;
+      }
+    }
+    return false;
   }
 
   void setImage(String imgPath) {
@@ -112,6 +145,13 @@ class Interactable {
     println("Log of:", name);
     println("X:", pos.x, "Y:", pos.y, "W:", w, "H:", h, "D:", dir);
     println("States:", states);
+    if (carryables.size() > 0) {
+      print("Carryables: ");
+      for (Carryable c : carryables) {
+        print(c.name + " ");
+      }
+      println();
+    }
     println("Visibile:", visible);
     if (img != null) println("Image loaded");
     println("Dest:", dest);
@@ -145,6 +185,13 @@ class Interactable {
       }
     }
     return out;
+  }
+
+  boolean isStateOr(String... sta) {
+    for (String s : sta) {
+      if (!states.contains(s)) return true;
+    }
+    return false;
   }
 
   boolean detectCollision(PVector mouse) {    

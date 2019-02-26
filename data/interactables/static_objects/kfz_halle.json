@@ -40,8 +40,10 @@
 			"name": "Akkus",
 			"menu": [
 				{
-					"name": "Akku in Flugzeug legen...",
-					"function": "accuInPlane"
+					"name": "Akku legen in...",
+					"then": {
+						"function": "moveAccuTo"
+					}
 				}
 			]
 		}

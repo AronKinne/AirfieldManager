@@ -61,3 +61,30 @@ Interactable getInteractable(PVector coords) {
   }
   return inter;
 }
+
+boolean inRange(Interactable i1, Interactable i2) {
+  Vehicle v = null;
+  Plane p = null;
+  Interactable i = null;
+  
+  if(i1 instanceof Vehicle) {
+    v = (Vehicle)i1;
+    if(i2 instanceof Plane) p = (Plane)i2;
+    else i = i2;
+  } else if(i2 instanceof Vehicle) {
+    v = (Vehicle)i2;
+    if(i1 instanceof Plane) p = (Plane)i1;
+    else i = i1;
+  } else {
+    println("ERROR: Could not find Vehicle for inRange()");
+    return false;
+  }
+  
+  float dist = p != null ? PVector.dist(v.towPoint, p.towPoint) : PVector.dist(v.pos, i.pos);
+  if(dist <= v.ropeLen) {
+    return true; 
+  } else {
+    println("ERROR: Not in range, " + dist + " > " + v.ropeLen);
+    return false;
+  }
+}
