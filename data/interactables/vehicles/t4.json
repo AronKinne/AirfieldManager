@@ -1,0 +1,106 @@
+{
+	"name": "T4",
+	"type": "vehicle",
+	"show": false,
+	"img": "data/images/t4.png",
+	"speed": 0.25,
+	"states": [
+		"IN_KFZHALLE"
+	],
+	"menu": [
+		{
+			"name": "Rausfahren",
+			"if": {
+				"states": [
+					"IN_KFZHALLE"
+				],
+				"object": {
+					"path": "data/interactables/static_objects/vorfeld.json",
+					"noStates": [
+						"HAT_VEHICLE"
+					]
+				}
+			},
+			"then": {
+				"remStates": [
+					"IN_KFZHALLE"
+				],
+				"show": true,
+				"pos": {
+					"x": 1393,
+					"y": 71,
+					"w": 8,
+					"h": 13,
+					"d": 200
+				}
+			}
+		},
+		{
+			"name": "In KFZ-Halle fahren",
+			"if": {
+				"noStates": [
+					"IN_KFZHALLE",
+					"HAT_FLUGZEUG"
+				],
+				"states": [
+					"IN_APRON"
+				]
+			},
+			"then": {
+				"addStates": [
+					"IN_KFZHALLE"
+				],
+				"show": false
+			}
+		},
+		{
+			"name": "Verbinden mit Flugzeug...",
+			"if": {
+				"noStates": [
+					"IN_KFZHALLE",
+					"HAT_FLUGZEUG",
+					"UNTERWEGS"
+				]
+			},
+			"then": {
+				"function": "connectToPlane"
+			}
+		},
+		{
+			"name": "Seil entfernen",
+			"if": {
+				"states": [
+					"HAT_FLUGZEUG"
+				],
+				"noStates": [
+					"IN_KFZHALLE"
+				]
+			},
+			"then": {
+				"exec": "removeConnection"
+			}
+		},
+		{
+			"name": "Fahre zu...",
+			"if": {
+				"noStates": [
+					"IN_KFZHALLE"
+				]
+			},
+			"then": {
+				"function": "goTo"
+			}
+		},
+		{
+			"name": "Akku legen in...",
+			"if": {
+				"states": [
+					"HAT_AKKU"
+				]
+			},
+			"then": {
+				"function": "moveAccuTo"
+			}
+		}
+	]
+}

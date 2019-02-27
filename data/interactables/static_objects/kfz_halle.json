@@ -18,7 +18,18 @@
 			"menu": [
 				"SKP",
 				"Winde",
-				"T4",
+				{
+					"name": "T4",
+					"object": "data/interactables/vehicles/t4.json",
+					"if": {
+						"object": {
+							"path": "data/interactables/vehicles/t4.json",
+							"states": [
+								"IN_KFZHALLE"
+							]
+						}
+					}
+				},
 				"Omega",
 				"Focus",
 				"Escort",
