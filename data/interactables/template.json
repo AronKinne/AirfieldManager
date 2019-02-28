@@ -1,8 +1,8 @@
 {
 	"name": "",
-	"type": "Plane/Vehicle/Interactable",
+	"type": "Plane/Vehicle/Interactable/Carryable",
 	"img": "",
-	"show": false,
+	"show": true,
 	"speed": ,
 	"states": [
 		""

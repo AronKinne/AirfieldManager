@@ -79,25 +79,38 @@ void goTo(Interactable inter, PVector mouse) {
 void moveAccuTo(Interactable inter, PVector mouse) {
   println("Function: moveAccuTo");
 
+  moveCarryTo(inter, mouse, "HAT_AKKU", "AKKU", "KFZ-Halle");
+}
+
+void moveChuteTo(Interactable inter, PVector mouse) {
+  println("Function: moveChuteTo");
+
+  moveCarryTo(inter, mouse, "HAT_FALLSCHIRM", "FALLSCHIRM", "Vereinsgebäude");
+}
+
+void moveCarryTo(Interactable inter, PVector mouse, String hasState, String stateName, String staticName) {
   Interactable i = getInteractable(getCoords(mouse.x, mouse.y));
-  String ha = "HAT_AKKU";
 
   if ((inter instanceof Vehicle || inter instanceof Plane) && (i instanceof Plane || i instanceof Vehicle)) {
-    if (inter.isState(ha) && i.isNoState(ha) && inRange(inter, i)) {
-      i.addState(ha);
-      inter.removeState(ha);
+    if (inter.isState(hasState) && inRange(inter, i)) {
+      i.addState(hasState);
+      i.addCarryable(stateName);
+      inter.removeCarryable(stateName);
+      if (!inter.isCarryable(stateName)) inter.removeState(hasState);
     }
-  } else if (inter.isState("STATIC") && (i instanceof Plane || i instanceof Vehicle)) {    
-    if (inter.isState(ha) && i.isNoState(ha) && i.isState("IN_APRON")) {
-      i.addState(ha);
-      inter.removeCarryable("AKKU");
-      if (!inter.isCarryable("AKKU")) inter.removeState(ha);
+  } else if (inter.name.equals(staticName) && (i instanceof Plane || i instanceof Vehicle)) {    
+    if (inter.isState(hasState) && i.isState("IN_APRON")) {
+      i.addState(hasState);
+      i.addCarryable(stateName);
+      inter.removeCarryable(stateName);
+      if (!inter.isCarryable(stateName)) inter.removeState(hasState);
     }
-  } else if ((inter instanceof Plane || inter instanceof Vehicle) && i.name.equals("KFZ-Halle")) {  
-    if (inter.isState(ha, "IN_APRON")) {
-      inter.removeState(ha);
-      i.addState(ha);
-      i.addCarryable("AKKU");
+  } else if ((inter instanceof Plane || inter instanceof Vehicle) && i.name.equals(staticName)) {  
+    if (inter.isState(hasState, "IN_APRON")) {
+      i.addState(hasState);
+      i.addCarryable(stateName);
+      inter.removeCarryable(stateName);
+      if (!inter.isCarryable(stateName)) inter.removeState(hasState);
     }
   }
 }

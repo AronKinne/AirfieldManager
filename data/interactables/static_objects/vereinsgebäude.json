@@ -1,0 +1,33 @@
+{
+	"name": "Vereinsgebäude",
+	"type": "Interactable",
+	"show": true,
+	"states": [
+		"STATIC"
+	],
+	"pos": {
+		"x": 1350,
+		"y": 116,
+		"w": 30,
+		"h": 15,
+		"d": 7
+	},
+	"menu": [
+		{
+			"name": "Fallschirme",
+			"menu": [
+				{
+					"name": "Fallschirm legen in...",
+					"if": {
+						"states": [
+							"HAT_FALLSCHIRM"
+						]
+					},
+					"then": {
+						"function": "moveChuteTo"
+					}
+				}
+			]
+		}
+	]
+}

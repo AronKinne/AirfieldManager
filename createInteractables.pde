@@ -37,7 +37,7 @@ void createInteractables(File[] files) {
           inter.setDirDeg(jPos.getFloat("d"));
         }
 
-        inter.jMenu = jFile.getJSONArray("menu");
+        if(jFile.getJSONArray("menu") != null) inter.jMenu = jFile.getJSONArray("menu");
 
         inter.jsonPath = f.getPath();
 

@@ -52,6 +52,11 @@
 			"menu": [
 				{
 					"name": "Akku legen in...",
+					"if": {
+						"states": [
+							"HAT_AKKU"
+						]
+					},
 					"then": {
 						"function": "moveAccuTo"
 					}

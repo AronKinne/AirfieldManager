@@ -1,0 +1,20 @@
+{
+	"name": "Fallschirm",
+	"type": "Carryable",
+	"show": false,
+	"owner": {
+		"path": "data/interactables/static_objects/vereinsgebäude.json",
+		"addStates": [
+			"HAT_FALLSCHIRM"
+		]
+	},
+	"amount": 5,
+	"states": [
+		"FALLSCHIRM"
+	],
+	"menu": [
+		{
+			"name": "lul"
+		}
+	]
+}

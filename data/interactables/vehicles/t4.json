@@ -101,6 +101,17 @@
 			"then": {
 				"function": "moveAccuTo"
 			}
+		},
+		{
+			"name": "Fallschirm legen in...",
+			"if": {
+				"states": [
+					"HAT_FALLSCHIRM"
+				]
+			},
+			"then": {
+				"function": "moveChuteTo"
+			}
 		}
 	]
 }
