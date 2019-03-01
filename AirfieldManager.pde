@@ -24,6 +24,7 @@ void setup() {
   currentMenu = null;
 
   airfield = loadImage("data/images/airfield.png");
+  //airfield = loadImage("data/images/pirna.jpg");
   airfield.resize(1600, 900);
 
   /* DEFAULT
