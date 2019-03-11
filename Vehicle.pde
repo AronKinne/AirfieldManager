@@ -8,7 +8,7 @@ class Vehicle extends Interactable {
     super(name, imgPath);
 
     pulledPlane = null;
-    ropeLen = 20;
+    ropeLen = 15;
   }
 
   void draw() {
@@ -18,16 +18,14 @@ class Vehicle extends Interactable {
 
     towPoint = PVector.add(pos, PVector.fromAngle(dir + HALF_PI).mult(h * .5));
   }
-  
-  void checkApron() {
-    if(visible && apron.detectCollision(pos.copy())) {
-       addState("IN_APRON");
-       apron.addState("HAT_VEHICLE");
+
+  private void checkApron() {
+    if (visible && apron.detectCollision(pos.copy())) {
+      addState("IN_APRON"); 
     } else {
-       removeState("IN_APRON"); 
-       apron.removeState("HAT_VEHICLE");
+      removeState("IN_APRON"); 
     }
-  }
+  }  
 
   void setPulledPlane(Plane pp) {
     pulledPlane = pp;

@@ -249,7 +249,27 @@ class Interactable {
     }
   }
 
+  private void checkApron() {
+    removeState("HAT_FLUGZEUG");
+    for (Interactable i : interactables) {      
+      if (i instanceof Plane && i.isState("IN_APRON")) {
+        addState("HAT_FLUGZEUG");
+        break;
+      }
+    }
+    
+    removeState("HAT_VEHICLE");
+    for (Interactable i : interactables) {      
+      if (i instanceof Vehicle && i.isState("IN_APRON")) {
+        addState("HAT_VEHICLE");
+        break;
+      }
+    }
+  }
+
   void draw() {
+    if (isState("APRON")) checkApron();
+
     goTo();
 
     if (visible) {

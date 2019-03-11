@@ -23,20 +23,20 @@ void setup() {
   
   currentMenu = null;
 
-  airfield = loadImage("data/images/airfield.png");
-  //airfield = loadImage("data/images/pirna.jpg");
+  airfield = loadImage("data/images/airfield.jpg");
   airfield.resize(1600, 900);
 
-  /* DEFAULT
+  // DEFAULT
   centerX = width * .5;
   centerY = height * .5;
   zoom = 1;
-  */
+  //
   
   // TEST
-  centerX = 1381;
-  centerY = 117;
-  zoom = 2.9;
+  centerX = 1200;
+  centerY = 285;
+  zoom = 3;
+  //
   
   activeFunc = "";
   activeInter = null;

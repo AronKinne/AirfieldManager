@@ -41,7 +41,9 @@ void createInteractables(File[] files) {
 
         inter.jsonPath = f.getPath();
 
-        if (inter.isState("APRON")) apron = inter;
+        if (inter.isState("APRON")) {
+          apron = inter;
+        }
 
         if (inter instanceof Carryable) {
           Carryable carry = (Carryable)inter;
